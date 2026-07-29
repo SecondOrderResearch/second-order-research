@@ -1,0 +1,33 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.ipynb_checkpoints/
+.env
+
+# Data
+data/raw/**
+!data/raw/.gitkeep
+data/staging/**
+!data/staging/.gitkeep
+data/exports/**
+!data/exports/.gitkeep
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
