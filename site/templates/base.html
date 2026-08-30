@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}Second Order Research — {{ title }}{% else %}Second Order Research{% endif %}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="{% if page == 'home' %}active{% endif %}">Home</a>
+        <a href="/library/" class="{% if page == 'library' %}active{% endif %}">Library</a>
+        <a href="/deeper-research/" class="{% if page == 'deeper-research' %}active{% endif %}">Deeper Research</a>
+        <a href="/weekly/" class="{% if page == 'weekly' %}active{% endif %}">Weekly</a>
+        <a href="/monthly/" class="{% if page == 'monthly' %}active{% endif %}">Monthly</a>
+        <a href="/founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    {% if page == 'home' %}
+      <section class="hero">
+        <h1>Independent football market intelligence</h1>
+        <p class="lead">
+          We study second-order variables — referee behaviour, travel distance,
+          xG momentum, weather, congestion — to find persistent, pre-registered
+          edges in football betting markets.
+        </p>
+        <p>
+          <a class="btn" href="/library/">View research library</a>
+          <a class="btn btn-secondary" href="/weekly/">Latest weekly notes</a>
+        </p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h2>What we publish</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Methodology</h3>
+            <p>
+              Pre-registered contrasts, Holm-Bonferroni correction, out-of-sample
+              holdouts, and explicit falsification criteria.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Research library</h3>
+            <p>
+              Formal hypothesis entries with status, results, interpretation,
+              lessons, and source files.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Weekly &amp; monthly notes</h3>
+            <p>
+              Operational updates, data-source reviews, and monthly synthesis
+              notes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Latest library entries</h2>
+        <ul class="entry-list">
+          {% for entry in public_entries %}
+            <li>
+              <a href="/library/{{ entry.slug }}.html">{{ entry.title }}</a>
+              <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Deeper research</h2>
+        <p class="lead">Original technical notes, pre-registered protocols, and full statistical output.</p>
+        <ul class="entry-list">
+          {% for entry in deeper_entries %}
+            <li>
+              <a href="/deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
+              <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Latest weekly notes</h2>
+        <ul class="entry-list">
+          {% for item in weekly_list %}
+            <li>
+              <a href="/weekly/{{ item.slug }}.html">{{ item.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if page == 'library' %}
+      <h1>Research Library</h1>
+      <ul class="entry-list">
+        {% for entry in public_entries %}
+          <li>
+            <a href="/library/{{ entry.slug }}.html">{{ entry.title }}</a>
+            <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if page == 'deeper-research' %}
+      <h1>Deeper Research</h1>
+      <p class="lead">Original technical research notes, pre-registered protocols, and full statistical output.</p>
+      <ul class="entry-list">
+        {% for entry in deeper_entries %}
+          <li>
+            <a href="/deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
+            <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if page == 'weekly' %}
+      <h1>Weekly Notes</h1>
+      <ul class="entry-list">
+        {% for item in weekly_list %}
+          <li>
+            <a href="/weekly/{{ item.slug }}.html">{{ item.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if page == 'monthly' %}
+      <h1>Monthly Reviews</h1>
+      <ul class="entry-list">
+        {% for item in monthly_list %}
+          <li>
+            <a href="/monthly/{{ item.slug }}.html">{{ item.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if page == 'founders' %}
+      <h1>Founders</h1>
+      <p class="lead">
+        Second Order Research was founded by two practitioners who believe
+        the same rigour used in institutional asset management can be applied
+        to sports market analysis.
+      </p>
+
+      <div class="founders">
+        <div class="founder">
+          <div class="founder-avatar" aria-hidden="true">SW</div>
+          <div class="founder-body">
+            <h2>Sean Westwood</h2>
+            <p class="founder-role">CEO &amp; Chief Sports Scientist</p>
+            <p>
+              Sean spent the first half of his career inside the UK pension
+              industry, building multi-asset investment frameworks and
+              overseeing governance for defined-benefit schemes. That
+              background gave him a deep respect for pre-registered
+              hypothesis testing, correction for multiple comparisons, and
+              the discipline of treating negative results as information
+              rather than failure.
+            </p>
+            <p>
+              In the mid-2010s he shifted into football analytics, first as
+              an investor in sports betting markets and later as a full-time
+              researcher. He designed the Second Order methodology because
+              he saw the same institutional blind spots in sports that he
+              had seen in fixed income: people confuse narrative with edge,
+              and they overreact to small samples. Sean leads the research
+              programme, hypothesis registry, and external partnerships.
+            </p>
+            <p>
+              Outside the lab, he is a lifelong football coach and holds a
+              postgraduate qualification in sports science.
+            </p>
+          </div>
+        </div>
+
+        <div class="founder">
+          <div class="founder-avatar" aria-hidden="true">RS</div>
+          <div class="founder-body">
+            <h2>Richard Sorrell</h2>
+            <p class="founder-role">CTO &amp; Director of Research</p>
+            <p>
+              Richard’s background is in fintech, where he built trading
+              platforms, data pipelines, and real-time analytics systems for
+              institutional clients. He brings experience in warehouse design,
+              fault-tolerant ingestion, and the kind of operational discipline
+              that turns raw data into decision-grade outputs.
+            </p>
+            <p>
+              At Second Order he owns the end-to-end data architecture:
+              collection schedulers, cross-source normalisation, feature
+              stores, and the statistical engine. He is the reason the
+              research library can support rather than interrupt the
+              hypothesis cycle, and he maintains the security and
+              reproducibility standards inherited from regulated financial
+              environments.
+            </p>
+            <p>
+              He lives in Fife, drives a Tesla Model 3 Performance, and
+              still occasionally argues with spreadsheets at 2 a.m.
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if page == 'entry' %}
+      <article class="entry">
+        <h1>{{ title }}</h1>
+        {{ body_html|safe }}
+      </article>
+    {% endif %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>
