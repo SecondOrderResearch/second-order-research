@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — 3-game rolling xG/xGA form vs opponent outperformance matchup</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="">Home</a>
+        <a href="/library/" class="">Library</a>
+        <a href="/deeper-research/" class="">Deeper Research</a>
+        <a href="/weekly/" class="">Weekly</a>
+        <a href="/monthly/" class="">Monthly</a>
+        <a href="/founders/" class="">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+      <article class="entry">
+        <h1>3-game rolling xG/xGA form vs opponent outperformance matchup</h1>
+        <p><strong>ID:</strong> 2026-08-03-xg-form-matchup<br>
+<strong>Title:</strong> 3-game rolling xG/xGA form vs opponent outperformance matchup<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Created:</strong> 2026-08-03<br>
+<strong>Hypothesis:</strong> A team’s 3-match rolling xG differential predicts match-point outcome, but this relationship weakens when the opponent has been outperforming its xGA.<br>
+<strong>Direction:</strong> Interaction expected: high xG differential advantage should be muted or reversed against opponents who have conceded fewer goals than xGA suggested.<br>
+<strong>Data source:</strong> StatsBomb Open Data linked sample (2015/16 Premier League via football-data.org match linkage).<br>
+<strong>Sample:</strong> 374 linked matches, 748 team-match rows, 320 matched pairs after rolling-window requirements.<br>
+<strong>Features:</strong> <code>match_xg</code> (home_xg, away_xg, home_xga, away_xga); <code>form_features</code> (rolling 3-game xG for/against and points).<br>
+<strong>Method:</strong> OLS on home_points with Holm-Bonferroni correction across 5 contrasts at familywise α=0.05.<br>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n</th>
+<th>beta</th>
+<th>p_value</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_home_xg_diff_vs_away</td>
+<td>320</td>
+<td>0.0369</td>
+<td>0.2531</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C2_opponent_xga_outperformance</td>
+<td>320</td>
+<td>-0.0383</td>
+<td>0.2692</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C3_interaction_home_xg_diff_x_away_outperformance</td>
+<td>320</td>
+<td>0.0116</td>
+<td>0.4799</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C4_home_xg_diff_home_only</td>
+<td>320</td>
+<td>0.0369</td>
+<td>0.2531</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C5_home_xg_diff_second_half</td>
+<td>160</td>
+<td>-0.0007</td>
+<td>0.9877</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>No contrast approached statistical significance after multiple-testing correction. The primary main effect (C1) showed a small positive beta (+0.037 points per unit xG differential) but with wide uncertainty and no detectable interaction effect. The opponent xGA outperformance term (C2) was also non-significant and in the opposite direction to the pre-registered expectation. Split-sample checks (home-only, second-half season) were null.</p>
+<h2>Conclusion</h2>
+<p>The hypothesis is rejected for this dataset and operationalisation. Possible reasons include limited sample size (one season, one competition), coarse 3-game window, simplistic rolling sum without opponent strength adjustment, and the use of <code>statsbomb_xg</code> rather than a consensus xG model. The null result is informative: it suggests recent shot-quality differentials alone are not a strong standalone predictor of match outcome in this period, and opponent xGA outperformance does not materially alter that relationship.</p>
+<h2>Lessons</h2>
+<ul>
+<li>xG differentials may need longer windows or opponent-weighted forms.</li>
+<li>Interaction effects require larger samples or more powerful designs.</li>
+<li>StatsBomb shot-level xG is usable but may benefit from calibration or comparison against alternative providers.</li>
+<li>The falsification-first protocol correctly classified this as a successful null result rather than a failed test.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>src/features/xg.py</code></li>
+<li><code>src/features/form.py</code></li>
+<li><code>src/analysis/hypothesis_xg_form_matchup.py</code></li>
+<li><code>data/warehouse/match_xg</code></li>
+</ul>
+      </article>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Long away travel distance and total corners</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="">Home</a>
+        <a href="/library/" class="">Library</a>
+        <a href="/deeper-research/" class="">Deeper Research</a>
+        <a href="/weekly/" class="">Weekly</a>
+        <a href="/monthly/" class="">Monthly</a>
+        <a href="/founders/" class="">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+      <article class="entry">
+        <h1>Long away travel distance and total corners</h1>
+        <p><strong>ID:</strong> 2026-08-03-travel-corners<br>
+<strong>Title:</strong> Long away travel distance and total corners<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Created:</strong> 2026-08-03<br>
+<strong>Hypothesis:</strong> Matches with long away travel (&gt;300 km) produce more total corners than short-travel matches (&lt;100 km).<br>
+<strong>Direction:</strong> Positive: longer travel → more corners.<br>
+<strong>Data source:</strong> StatsBomb Open Data linked sample (2015/16 Premier League via football-data.org match linkage).<br>
+<strong>Sample:</strong> 374 linked matches; 336 team-match rows after travel join; 50 long, 64 short, 222 mid.<br>
+<strong>Features:</strong> <code>travel_matrix.distance_km</code>; <code>match_events</code> corner proxy (<code>play_pattern == From Corner</code>).<br>
+<strong>Method:</strong> Welch’s t-test + Cohen’s d + 95% CI; Holm-Bonferroni correction across 4 contrasts at familywise α=0.05.<br>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_treatment</th>
+<th>n_control</th>
+<th>mean_treatment</th>
+<th>mean_control</th>
+<th>mean_shift_pct</th>
+<th>cohens_d</th>
+<th>p_value</th>
+<th>ci_95_low</th>
+<th>ci_95_high</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_long_vs_short</td>
+<td>50</td>
+<td>64</td>
+<td>122.34</td>
+<td>142.36</td>
+<td>-14.06</td>
+<td>-0.343</td>
+<td>0.069995</td>
+<td>-41.69</td>
+<td>1.65</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C2_home_vs_away_in_long</td>
+<td>50</td>
+<td>50</td>
+<td>58.54</td>
+<td>63.80</td>
+<td>-8.24</td>
+<td>-0.159</td>
+<td>0.427909</td>
+<td>-18.37</td>
+<td>7.85</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C3_opponent_travel_adjusted_long_vs_short</td>
+<td>50</td>
+<td>64</td>
+<td>122.34</td>
+<td>142.36</td>
+<td>-14.06</td>
+<td>-0.343</td>
+<td>0.069995</td>
+<td>-41.69</td>
+<td>1.65</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C5_season_split_2015/2016_vs_2003/2004</td>
+<td>46</td>
+<td>4</td>
+<td>125.59</td>
+<td>85.00</td>
+<td>47.75</td>
+<td>0.725</td>
+<td>0.129663</td>
+<td>-2.70</td>
+<td>83.87</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>No contrast reached statistical significance after Holm-Bonferroni correction. The primary contrast (C1) showed a negative point estimate: long-travel matches had fewer corner proxies than short-travel matches (-14.1%, d=-0.343), opposite to the pre-registered direction. The season-split contrast (C5) showed a large effect but with very small control cell size (n=4) and non-significant p-value.</p>
+<h2>Conclusion</h2>
+<p>The hypothesis is rejected for this dataset and operationalisation. Possible reasons include the indirect corner proxy, limited sample size, and confounding by team/season. The null result is informative: simple travel-distance thresholds do not appear to drive corner volume in this linked sample.</p>
+<h2>Lessons</h2>
+<ul>
+<li>Corner proxy via <code>play_pattern == From Corner</code> is noisy; true corner-kick event labels should be used if available.</li>
+<li>Travel effects may be non-linear or mediated by other factors; binary splits may miss subtler signals.</li>
+<li>Season-split checks require balanced samples; small cells should be flagged rather than over-interpreted.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>src/analysis/hypothesis_travel_corners.py</code></li>
+<li><code>src/analysis/match_analysis.py</code></li>
+<li><code>data/warehouse/travel_matrix</code></li>
+</ul>
+      </article>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -10,7 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 
 REPO = Path(__file__).resolve().parent.parent
 SITE_DIR = REPO / "site"
-OUT_DIR = SITE_DIR / "dist"
+OUT_DIR = REPO / "docs"
 TEMPLATE_DIR = SITE_DIR / "templates"
 ASSETS_DIR = SITE_DIR / "assets"
 

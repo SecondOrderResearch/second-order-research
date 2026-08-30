@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Data Source Anomaly — football-data.org API</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="">Home</a>
+        <a href="/library/" class="">Library</a>
+        <a href="/deeper-research/" class="">Deeper Research</a>
+        <a href="/weekly/" class="">Weekly</a>
+        <a href="/monthly/" class="">Monthly</a>
+        <a href="/founders/" class="">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+      <article class="entry">
+        <h1>Data Source Anomaly — football-data.org API</h1>
+        <h1>Data Source Anomaly — football-data.org API</h1>
+<p><strong>Date:</strong> 2026-07-29<br>
+<strong>Status:</strong> Blocked — requires resolution before full backfill<br>
+<strong>Impact:</strong> Week 2 backfill path A deferred; fallback path B ready</p>
+<h2>Finding</h2>
+<ul>
+<li><code>FOOTBALL_DATA_ORG_API_KEY</code> resolved from <code>.env</code> as <code>FOOTBALL_DATA_API_KEY</code> (32 chars).</li>
+<li>Direct API test: <code>GET /v4/matches?competition=PL&amp;season=2022</code> returns HTTP 200, but payload is <strong>BSA / Campeonato Brasileiro Série A</strong> with upcoming dates (2026-07-30 to 2026-07-31), not Premier League 2022/23.</li>
+<li>Response metadata: <code>"permission":"TIER_ONE"</code>, <code>"count":3</code>, <code>"competitions":"BSA"</code>.</li>
+<li>Conclusion: either the competition filter is not being applied, or the free-tier key does not have access to PL historical fixtures via this endpoint.</li>
+</ul>
+<h2>Likely causes</h2>
+<ol>
+<li>Free-tier key restricted to upcoming/limited competitions, not full PL history.</li>
+<li>Season filter format incompatible with v4 API expectations.</li>
+<li>Endpoint/route requires a different path for historical data.</li>
+</ol>
+<h2>Decision taken</h2>
+<p>Do <strong>not</strong> block Week 2 on resolving football-data.org access.
+Adopt <strong>Option 2</strong> from plan: Wikipedia + API-Football + StatsBomb Open Data for fixtures/results.
+Football-data.org will be re-evaluated once a paid/upgraded key or correct endpoint is confirmed.</p>
+<h2>Next actions</h2>
+<ul>
+<li>Implement Wikipedia fixtures scraper for 2022/23–2024/25.</li>
+<li>Implement API-Football free-tier fallback for fixtures.</li>
+<li>Proceed with StatsBomb Open Data for match events.</li>
+<li>Document exact coverage gaps in <code>/research/data-quality/</code>.</li>
+</ul>
+<hr>
+<p><em>This finding is filed as a negative result in the research record: the source is available but not usable for the intended historical backfill without further qualification.</em></p>
+      </article>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

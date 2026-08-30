@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Referee foul/card ratio and total cards</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="">Home</a>
+        <a href="/library/" class="">Library</a>
+        <a href="/deeper-research/" class="">Deeper Research</a>
+        <a href="/weekly/" class="">Weekly</a>
+        <a href="/monthly/" class="">Monthly</a>
+        <a href="/founders/" class="">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+      <article class="entry">
+        <h1>Referee foul/card ratio and total cards</h1>
+        <p><strong>ID:</strong> 2026-08-03-referee-cards<br>
+<strong>Title:</strong> Referee foul/card ratio and total cards<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Created:</strong> 2026-08-03<br>
+<strong>Hypothesis:</strong> Referees with above-league-average foul/card ratios inflate total cards in matches they officiate.<br>
+<strong>Direction:</strong> Positive: higher referee card ratio → more cards.<br>
+<strong>Data source:</strong> StatsBomb Open Data linked sample (2015/16 Premier League via football-data.org match linkage).<br>
+<strong>Sample:</strong> 374 linked matches; 461 high-ratio team-match rows, 1384 control.<br>
+<strong>Features:</strong> <code>referee_features.referee_avg_cards_per_game</code>, <code>referee_avg_fouls_per_game</code>; <code>match_events</code> card proxy (<code>Bad Behaviour</code>).<br>
+<strong>Method:</strong> Welch’s t-test + Cohen’s d + 95% CI; Holm-Bonferroni correction across 3 contrasts at familywise α=0.05.<br>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_treatment</th>
+<th>n_control</th>
+<th>mean_treatment</th>
+<th>mean_control</th>
+<th>mean_shift_pct</th>
+<th>cohens_d</th>
+<th>p_value</th>
+<th>ci_95_low</th>
+<th>ci_95_high</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_high_ref_ratio_vs_league</td>
+<td>461</td>
+<td>1384</td>
+<td>0.4100</td>
+<td>0.5087</td>
+<td>-19.40</td>
+<td>-0.123</td>
+<td>0.0125</td>
+<td>-0.1761</td>
+<td>-0.0213</td>
+<td>True</td>
+</tr>
+<tr>
+<td>C2_home_vs_away_under_high_ref</td>
+<td>461</td>
+<td>461</td>
+<td>78.7939</td>
+<td>68.8568</td>
+<td>14.43</td>
+<td>0.238</td>
+<td>0.0003</td>
+<td>4.5454</td>
+<td>15.3288</td>
+<td>True</td>
+</tr>
+<tr>
+<td>C4_season_split_2015/2016_vs_2003/2004</td>
+<td>445</td>
+<td>16</td>
+<td>0.3888</td>
+<td>1.0000</td>
+<td>-61.12</td>
+<td>-0.887</td>
+<td>0.0325</td>
+<td>-1.1225</td>
+<td>-0.1000</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>All contrasts reached Holm-Bonferroni significance. However, the primary contrast (C1) showed a <strong>negative</strong> effect: high-ratio referees had <strong>fewer</strong> card proxies than the league average (-19.4%, d=-0.123), opposite to the pre-registered direction. The home/away split (C2) showed more corners for home teams under high-ratio referees, but this is a secondary finding. The season split (C4) had a large effect but very small control cell (n=16).</p>
+<h2>Conclusion</h2>
+<p>The hypothesis is <strong>rejected</strong> for this dataset and operationalisation. The directional prediction that high foul/card ratio referees inflate cards is falsified; if anything, the opposite pattern appears. Possible reasons include:
+- <code>Bad Behaviour</code> as a card proxy may undercount yellows or be inconsistently recorded across referees
+- Referee card ratios may reflect stricter overall control rather than card-heavy tendencies
+- Sample bias from 2003/04 season data quality issues</p>
+<h2>Lessons</h2>
+<ul>
+<li>Card proxy via <code>Bad Behaviour</code> is noisy and should be validated against true card counts.</li>
+<li>Referee-level ratios require careful calibration; simple ratio thresholds may not capture behavioral style.</li>
+<li>Falsification of the directional hypothesis is a successful null result under this methodology.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>src/analysis/hypothesis_referee_cards.py</code></li>
+<li><code>src/features/referee_features.py</code></li>
+<li><code>data/warehouse/referee_features</code></li>
+</ul>
+      </article>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

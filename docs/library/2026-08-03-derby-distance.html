@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Derby matches and match intensity</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="">Home</a>
+        <a href="/library/" class="">Library</a>
+        <a href="/deeper-research/" class="">Deeper Research</a>
+        <a href="/weekly/" class="">Weekly</a>
+        <a href="/monthly/" class="">Monthly</a>
+        <a href="/founders/" class="">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+      <article class="entry">
+        <h1>Derby matches and match intensity</h1>
+        <p><strong>ID:</strong> 2026-08-03-derby-distance<br>
+<strong>Title:</strong> Derby matches and match intensity<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Created:</strong> 2026-08-03<br>
+<strong>Hypothesis:</strong> Derby matches (distance &lt;20km) show elevated cards, goals, corners, and other events.<br>
+<strong>Direction:</strong> Positive: derby → more cards/goals/corners/fouls.<br>
+<strong>Data source:</strong> StatsBomb Open Data linked sample (2015/16 Premier League via football-data.org match linkage).<br>
+<strong>Sample:</strong> 374 linked matches; 30 derby matches (&lt;20km), 306 non-derby matches.<br>
+<strong>Features:</strong> <code>travel_matrix.distance_km</code>; <code>match_events</code> foul/card/corner proxies.<br>
+<strong>Method:</strong> Welch’s t-test + Cohen’s d + 95% CI; Holm-Bonferroni correction across 5 contrasts at familywise α=0.05.<br>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_treatment</th>
+<th>n_control</th>
+<th>mean_treatment</th>
+<th>mean_control</th>
+<th>mean_shift_pct</th>
+<th>cohens_d</th>
+<th>p_value</th>
+<th>ci_95_low</th>
+<th>ci_95_high</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_derby_vs_non_derby_goals</td>
+<td>30</td>
+<td>306</td>
+<td>2.6333</td>
+<td>2.6503</td>
+<td>-0.64</td>
+<td>-0.010</td>
+<td>0.9535</td>
+<td>-0.5869</td>
+<td>0.5530</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C2_derby_vs_non_derby_corners</td>
+<td>30</td>
+<td>306</td>
+<td>134.0667</td>
+<td>138.1438</td>
+<td>-2.95</td>
+<td>-0.061</td>
+<td>0.6461</td>
+<td>-21.4255</td>
+<td>13.2712</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C3_derby_vs_non_derby_fouls</td>
+<td>30</td>
+<td>306</td>
+<td>29.2667</td>
+<td>25.8301</td>
+<td>13.30</td>
+<td>0.597</td>
+<td>0.0045</td>
+<td>1.2111</td>
+<td>5.6621</td>
+<td>True</td>
+</tr>
+<tr>
+<td>C4_derby_vs_non_derby_cards</td>
+<td>30</td>
+<td>306</td>
+<td>1.0333</td>
+<td>0.4444</td>
+<td>132.50</td>
+<td>0.725</td>
+<td>0.0330</td>
+<td>0.0703</td>
+<td>1.1075</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C5_home_vs_away_derby_corners</td>
+<td>30</td>
+<td>30</td>
+<td>73.0333</td>
+<td>61.0333</td>
+<td>19.66</td>
+<td>0.420</td>
+<td>0.1090</td>
+<td>-2.7533</td>
+<td>26.7533</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>The primary hypothesis—that derby matches have more goals, corners, cards, and other events—was not supported for goals, corners, or cards. However, <strong>fouls were significantly higher in derby matches</strong> (mean 29.3 vs 25.8, +13.3%, Cohen’s d=0.597, p=0.0045 after Holm-Bonferroni correction). This is the strongest effect observed across all hypotheses tested so far. The card contrast (C4) showed a large effect size but did not survive correction.</p>
+<h2>Conclusion</h2>
+<p>The hypothesis is <strong>partially supported</strong> for fouls only. Derby matches do not show significantly more goals or corners, but they do show significantly more fouls. This suggests derby intensity manifests primarily in fouls rather than scoring or set pieces in this sample.</p>
+<h2>Lessons</h2>
+<ul>
+<li>Derby effects may be localized to specific event types; testing multiple outcomes is essential.</li>
+<li>The 20km threshold captured 30 matches in this linked sample; expanding the sample would improve power.</li>
+<li>Card proxies remain noisy; larger samples are needed to detect card effects.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>src/analysis/hypothesis_derby.py</code></li>
+<li><code>src/analysis/match_analysis.py</code></li>
+<li><code>data/warehouse/travel_matrix</code></li>
+</ul>
+      </article>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

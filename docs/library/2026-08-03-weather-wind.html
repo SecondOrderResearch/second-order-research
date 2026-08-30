@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Wind speed versus goals and corners</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class="">Home</a>
+        <a href="/library/" class="">Library</a>
+        <a href="/deeper-research/" class="">Deeper Research</a>
+        <a href="/weekly/" class="">Weekly</a>
+        <a href="/monthly/" class="">Monthly</a>
+        <a href="/founders/" class="">Founders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+      <article class="entry">
+        <h1>Wind speed versus goals and corners</h1>
+        <p><strong>ID:</strong> 2026-08-03-weather-wind<br>
+<strong>Title:</strong> Wind speed versus goals and corners<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Created:</strong> 2026-08-03<br>
+<strong>Hypothesis:</strong> Higher wind speeds are associated with fewer total goals but more total corners.<br>
+<strong>Direction:</strong> Negative for goals, positive for corners.<br>
+<strong>Data source:</strong> Open-Meteo archive API matched to StatsBomb-linked matches (2003/04 and 2015/16 seasons).<br>
+<strong>Sample:</strong> 374 linked matches; 278 with weather data after matching; 170 high-wind, 13 low-wind.<br>
+<strong>Features:</strong> <code>weather.wind_speed_10m_max</code>, <code>weather.precipitation_sum</code>; goals and corner proxies from match data.<br>
+<strong>Method:</strong> Welch’s t-test + Cohen’s d + 95% CI; Holm-Bonferroni correction across 5 contrasts at familywise α=0.05.<br>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_treatment</th>
+<th>n_control</th>
+<th>mean_treatment</th>
+<th>mean_control</th>
+<th>mean_shift_pct</th>
+<th>cohens_d</th>
+<th>p_value</th>
+<th>ci_95_low</th>
+<th>ci_95_high</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_high_wind_vs_low_goals</td>
+<td>170</td>
+<td>13</td>
+<td>2.5588</td>
+<td>2.6923</td>
+<td>-4.96</td>
+<td>-0.081</td>
+<td>0.8119</td>
+<td>-1.2186</td>
+<td>0.9516</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C2_high_wind_vs_low_corners</td>
+<td>170</td>
+<td>13</td>
+<td>146.8882</td>
+<td>133.7692</td>
+<td>9.81</td>
+<td>0.182</td>
+<td>0.5835</td>
+<td>-32.9615</td>
+<td>59.1995</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C3_home_vs_away_high_wind_corners</td>
+<td>170</td>
+<td>170</td>
+<td>75.5059</td>
+<td>71.3824</td>
+<td>5.78</td>
+<td>0.094</td>
+<td>0.3848</td>
+<td>-5.1972</td>
+<td>13.4443</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C4_wet_vs_dry_goals</td>
+<td>135</td>
+<td>98</td>
+<td>2.4741</td>
+<td>2.8061</td>
+<td>-11.83</td>
+<td>-0.204</td>
+<td>0.1305</td>
+<td>-0.7629</td>
+<td>0.0988</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C5_season_split_2015/2016_vs_2003/2004</td>
+<td>164</td>
+<td>6</td>
+<td>2.5671</td>
+<td>2.3333</td>
+<td>10.02</td>
+<td>0.144</td>
+<td>0.6982</td>
+<td>-0.8958</td>
+<td>1.3633</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>No contrast reached statistical significance after Holm-Bonferroni correction. The primary contrast (C1) showed a small negative effect: high-wind matches had slightly fewer total goals than low-wind matches (-5.0%, d=-0.081), but this was far from significant. The corners contrast (C2) was in the predicted direction (+9.8%), but also non-significant with a very small control cell (n=13). The precipitation contrast (C4) showed a larger effect size (-11.8%, d=-0.204) but remained non-significant.</p>
+<h2>Conclusion</h2>
+<p>The hypothesis is rejected for this dataset and operationalisation. Possible reasons include:
+- Weather effects on goals/corners may be weak or mediated by pitch quality
+- The wind threshold (20 kph high vs 10 kph low) may be too conservative
+- Open-Meteo daily max wind may not capture match-day wind conditions accurately
+- Sample imbalance: very few low-wind matches in the linked sample</p>
+<h2>Lessons</h2>
+<ul>
+<li>Weather as a second-order variable requires precise temporal matching to kickoff time, not just daily aggregates.</li>
+<li>Threshold selection for weather bands materially affects power; adaptive thresholds based on distribution should be explored.</li>
+<li>Cross-season validation is hampered by small sample sizes in weather-matched data.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>src/analysis/hypothesis_weather_wind.py</code></li>
+<li><code>src/features/weather.py</code></li>
+<li><code>scripts/fetch_open_meteo_weather.py</code></li>
+<li><code>data/raw/open-meteo/</code></li>
+</ul>
+      </article>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>
