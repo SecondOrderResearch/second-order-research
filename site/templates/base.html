@@ -154,6 +154,27 @@
         <h1>Research Library</h1>
         <p class="lead">Formal hypothesis entries with status, results, interpretation, lessons, and source files.</p>
       </section>
+      <section>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Library</h3>
+            <p>{{ public_entries|length }} public entries with status and findings.</p>
+          </div>
+          <div class="card">
+            <h3>Status</h3>
+            <p>
+              {% set supported = public_entries | selectattr('status', 'equalto', 'Supported') | list | length %}
+              {% set rejected = public_entries | selectattr('status', 'equalto', 'Rejected') | list | length %}
+              {% set in_progress = public_entries | selectattr('status', 'equalto', 'In Progress') | list | length %}
+              {{ supported }} supported · {{ rejected }} rejected · {{ in_progress }} in progress
+            </p>
+          </div>
+          <div class="card">
+            <h3>Deeper research</h3>
+            <p>{{ deeper_entries|length }} technical notes with full statistical output.</p>
+          </div>
+        </div>
+      </section>
       <ul class="entry-list">
         {% for entry in public_entries %}
           <li>
