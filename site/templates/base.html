@@ -10,14 +10,14 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="/">Second Order Research</a>
+      <a class="brand" href="./">Second Order Research</a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="/" class="{% if page == 'home' %}active{% endif %}">Home</a>
-        <a href="/library/" class="{% if page == 'library' %}active{% endif %}">Library</a>
-        <a href="/deeper-research/" class="{% if page == 'deeper-research' %}active{% endif %}">Deeper Research</a>
-        <a href="/weekly/" class="{% if page == 'weekly' %}active{% endif %}">Weekly</a>
-        <a href="/monthly/" class="{% if page == 'monthly' %}active{% endif %}">Monthly</a>
-        <a href="/founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
+        <a href="./" class="{% if page == 'home' %}active{% endif %}">Home</a>
+        <a href="library/" class="{% if page == 'library' %}active{% endif %}">Library</a>
+        <a href="deeper-research/" class="{% if page == 'deeper-research' %}active{% endif %}">Deeper Research</a>
+        <a href="weekly/" class="{% if page == 'weekly' %}active{% endif %}">Weekly</a>
+        <a href="monthly/" class="{% if page == 'monthly' %}active{% endif %}">Monthly</a>
+        <a href="founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
       </nav>
     </div>
   </header>
@@ -32,8 +32,8 @@
           edges in football betting markets.
         </p>
         <p>
-          <a class="btn" href="/library/">View research library</a>
-          <a class="btn btn-secondary" href="/weekly/">Latest weekly notes</a>
+          <a class="btn" href="library/">View research library</a>
+          <a class="btn btn-secondary" href="weekly/">Latest weekly notes</a>
         </p>
       </section>
 
@@ -71,7 +71,7 @@
         <ul class="entry-list">
           {% for entry in public_entries %}
             <li>
-              <a href="/library/{{ entry.slug }}.html">{{ entry.title }}</a>
+              <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
               <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
             </li>
           {% endfor %}
@@ -84,7 +84,7 @@
         <ul class="entry-list">
           {% for entry in deeper_entries %}
             <li>
-              <a href="/deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
+              <a href="deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
               <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
             </li>
           {% endfor %}
@@ -96,7 +96,7 @@
         <ul class="entry-list">
           {% for item in weekly_list %}
             <li>
-              <a href="/weekly/{{ item.slug }}.html">{{ item.title }}</a>
+              <a href="weekly/{{ item.slug }}.html">{{ item.title }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -108,7 +108,7 @@
       <ul class="entry-list">
         {% for entry in public_entries %}
           <li>
-            <a href="/library/{{ entry.slug }}.html">{{ entry.title }}</a>
+            <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
             <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
           </li>
         {% endfor %}
@@ -121,7 +121,7 @@
       <ul class="entry-list">
         {% for entry in deeper_entries %}
           <li>
-            <a href="/deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
+            <a href="deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
             <span class="badge badge-{{ entry.status.lower() }}">{{ entry.status }}</span>
           </li>
         {% endfor %}
@@ -133,7 +133,7 @@
       <ul class="entry-list">
         {% for item in weekly_list %}
           <li>
-            <a href="/weekly/{{ item.slug }}.html">{{ item.title }}</a>
+            <a href="weekly/{{ item.slug }}.html">{{ item.title }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -144,7 +144,7 @@
       <ul class="entry-list">
         {% for item in monthly_list %}
           <li>
-            <a href="/monthly/{{ item.slug }}.html">{{ item.title }}</a>
+            <a href="monthly/{{ item.slug }}.html">{{ item.title }}</a>
           </li>
         {% endfor %}
       </ul>
