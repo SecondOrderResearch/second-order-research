@@ -33,3 +33,48 @@ If a match is played on a **105x68 or larger pitch**:
 - Add pitch data to pre-match model
 - Track corner market movements closely
 - Test in-play when pitch conditions are confirmed
+
+
+## Large pitches
+
+In our dataset, pitches with dimensions **105×68 or larger** are classified as **large**. The following pitches are included:
+
+- Emirates Stadium
+- Villa Park
+- Vitality Stadium
+- Gtech Community Stadium
+- Amex Stadium
+- Portman Road
+- King Power Stadium
+- Etihad Stadium
+- Old Trafford
+- St James' Park
+- City Ground
+- Carrow Road
+- Molineux Stadium
+- St Mary's Stadium
+- Tottenham Hotspur Stadium
+- Vicarage Road
+- The Hawthorns
+- London Stadium
+- Bramall Lane
+- The Den
+- Kassam Stadium
+- Kenilworth Road
+- MKM Stadium
+- Pride Park
+- Riverside Stadium
+- St Andrews
+- Elland Road
+- Ewood Park
+- The Valley
+- Toughsheet Community Stadium
+- White Hart Lane
+- bet365 Stadium
+- Hillsborough
+- Madejski Stadium
+- Bloomfield Road
+- Deepdale
+- Fratton Park
+- Home Park
+- Oakwell
