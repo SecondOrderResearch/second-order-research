@@ -37,8 +37,3 @@ Larger pitches are associated with:
 - Pitch sizes are based on team home grounds, not exact match venues
 - Most pitches are 105x68, limiting variance
 - Does not account for team quality or match context
-
-## Files
-- `src/analysis/hypothesis_pitch_size.py`
-- `src/ingestion/build_pitch_database.py`
-- `data/processed/match_master_table.csv`

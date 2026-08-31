@@ -2,6 +2,9 @@
 
 Wind is football's forgotten villain. High wind should rattle passes and lofted deliveries. We tested whether wind speed changes goals or corners.
 
+
+> **Pitch size note:** In our dataset, pitches with dimensions **105×68 or larger** are classified as **large**. Home teams generate **22.8% more corners** on large pitches than away teams.
+
 ## What we tested
 
 - Matched match-day wind speeds to goal and corner counts.

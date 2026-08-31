@@ -13,6 +13,9 @@
 **Method:** Welch’s t-test + Cohen’s d + 95% CI; Holm-Bonferroni correction across 5 contrasts at familywise α=0.05.  
 **Evidentiary thresholds:** p<0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound > breakeven margin, out-of-sample same-direction p<0.05.  
 
+
+> **Pitch size note:** In our dataset, pitches with dimensions **105×68 or larger** are classified as **large**. Home teams generate **22.8% more corners** on large pitches than away teams.
+
 ## Results
 
 | Contrast | n_treatment | n_control | mean_treatment | mean_control | mean_shift_pct | cohens_d | p_value | ci_95_low | ci_95_high | significant_holm |

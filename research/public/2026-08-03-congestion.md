@@ -2,6 +2,9 @@
 
 Football crowds are loud, congested fixtures are tighter, and bookmakers sometimes price in a bigger home advantage than reality delivers. We tested whether congested periods change match outcomes, goals, or corners across Premier League seasons.
 
+
+> **Pitch size note:** In our dataset, pitches with dimensions **105×68 or larger** are classified as **large**. Home teams generate **22.8% more corners** on large pitches than away teams.
+
 ## What we tested
 
 - Defined congested windows as teams playing 2+ matches within 4 days.

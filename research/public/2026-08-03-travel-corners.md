@@ -2,6 +2,9 @@
 
 We tested whether long away travel (>300 km) produces more corners than short-travel matches (<100 km).
 
+
+> **Pitch size note:** In our dataset, pitches with dimensions **105×68 or larger** are classified as **large**. Home teams generate **22.8% more corners** on large pitches than away teams.
+
 ## What we tested
 
 - Segmented matches by away travel distance.

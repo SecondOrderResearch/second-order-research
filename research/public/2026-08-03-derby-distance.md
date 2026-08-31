@@ -2,6 +2,9 @@
 
 Derby matches are supposed to be chaotic, but we wanted to know whether that chaos shows up in the stats. We tested whether matches between nearby teams produce more cards, goals, corners, and fouls.
 
+
+> **Pitch size note:** In our dataset, pitches with dimensions **105×68 or larger** are classified as **large**. Home teams generate **22.8% more corners** on large pitches than away teams.
+
 ## What we tested
 
 - Defined derby matches as teams within 20 km of each other.
