@@ -1,9 +1,6 @@
 # Congestion: congested fixtures show weaker home performance
 
-Football crowds are loud, congested fixtures are tighter, and bookmakers
-sometimes price in a bigger home advantage than reality delivers. We tested
-whether congested periods change match outcomes, goals, or corners across
-Premier League seasons.
+Football crowds are loud, congested fixtures are tighter, and bookmakers sometimes price in a bigger home advantage than reality delivers. We tested whether congested periods change match outcomes, goals, or corners across Premier League seasons.
 
 ## What we tested
 
@@ -13,12 +10,9 @@ Premier League seasons.
 
 ## Findings
 
-- Home win rate drops in congested windows, but the effect is small and not
-  statistically significant after Holm-Bonferroni correction.
-- Goals per game barely move; corners show a mild reduction when both teams
-  are congested.
-- Referee strictness increases slightly in congested matches, mainly more
-  yellow cards.
+- Home win rate drops in congested windows, but the effect is small and not statistically significant after Holm-Bonferroni correction.
+- Goals per game barely move; corners show a mild reduction when both teams are congested.
+- Referee strictness increases slightly in congested matches, mainly more yellow cards.
 
 ## Action points for gamblers
 

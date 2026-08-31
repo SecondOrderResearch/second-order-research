@@ -50,7 +50,7 @@
 <strong>Sample:</strong> 374 linked matches; 31 home congested, 30 away congested, 17 both congested, 44 either congested.<br>
 <strong>Features:</strong> Congestion flags from match-date gaps; <code>match_events</code> foul/corner proxies.<br>
 <strong>Method:</strong> Welch’s t-test + Cohen’s d + 95% CI; Holm-Bonferroni correction across 4 contrasts at familywise α=0.05.<br>
-<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.</p>
 <h2>Results</h2>
 <table>
 <thead>
@@ -134,12 +134,6 @@
 <ul>
 <li>Congestion features require careful threshold selection and should be validated against squad rotation data.</li>
 <li>Small treatment cells reduce power; larger samples across multiple seasons are needed.</li>
-</ul>
-<h2>Files</h2>
-<ul>
-<li><code>src/analysis/hypothesis_congestion.py</code></li>
-<li><code>src/analysis/match_analysis.py</code></li>
-<li><code>src/features/congestion.py</code></li>
 </ul>
         </article>
         <aside class="entry-sidebar">
