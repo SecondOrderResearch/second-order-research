@@ -67,6 +67,52 @@
       </section>
 
       <section>
+        <h2>Research Pipeline</h2>
+        <div class="chart-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" aria-label="Research pipeline diagram">
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#0f4c81"></path>
+              </marker>
+            </defs>
+            
+            <!-- Boxes -->
+            <rect x="20" y="80" width="120" height="60" rx="8" fill="#ffffff" stroke="#0f4c81" stroke-width="2"></rect>
+            <text x="80" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#1f2933">Hypothesis</text>
+            
+            <rect x="180" y="80" width="120" height="60" rx="8" fill="#ffffff" stroke="#0f4c81" stroke-width="2"></rect>
+            <text x="240" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#1f2933">Pre-register</text>
+            
+            <rect x="340" y="80" width="120" height="60" rx="8" fill="#ffffff" stroke="#0f4c81" stroke-width="2"></rect>
+            <text x="400" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#1f2933">Collect</text>
+            
+            <rect x="500" y="80" width="120" height="60" rx="8" fill="#ffffff" stroke="#0f4c81" stroke-width="2"></rect>
+            <text x="560" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#1f2933">Analyse</text>
+            
+            <rect x="660" y="80" width="120" height="60" rx="8" fill="#ffffff" stroke="#0f4c81" stroke-width="2"></rect>
+            <text x="720" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#1f2933">Publish</text>
+            
+            <!-- Arrows -->
+            <line x1="140" y1="110" x2="180" y2="110" stroke="#0f4c81" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="300" y1="110" x2="340" y2="110" stroke="#0f4c81" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="460" y1="110" x2="500" y2="110" stroke="#0f4c81" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="620" y1="110" x2="660" y2="110" stroke="#0f4c81" stroke-width="2" marker-end="url(#arrow)"></line>
+            
+            <!-- Cycle arrow -->
+            <path d="M 720 170 Q 720 200 400 200 Q 80 200 80 170" stroke="#6b7280" stroke-width="1.5" fill="none" marker-end="url(#arrow)"></path>
+            <text x="400" y="215" text-anchor="middle" font-size="12" fill="#6b7280">Feedback loop</text>
+          </svg>
+        </div>
+      </section>
+
+      <section>
+        <h2>Research pipeline</h2>
+        <div class="chart-wrap">
+          {{ methodology_chart | safe }}
+        </div>
+      </section>
+
+      <section>
         <h2>Latest library entries</h2>
         <ul class="entry-list">
           {% for entry in public_entries %}
@@ -104,7 +150,10 @@
     {% endif %}
 
     {% if page == 'library' %}
-      <h1>Research Library</h1>
+      <section class="page-header">
+        <h1>Research Library</h1>
+        <p class="lead">Formal hypothesis entries with status, results, interpretation, lessons, and source files.</p>
+      </section>
       <ul class="entry-list">
         {% for entry in public_entries %}
           <li>
@@ -116,8 +165,10 @@
     {% endif %}
 
     {% if page == 'deeper-research' %}
-      <h1>Deeper Research</h1>
-      <p class="lead">Original technical research notes, pre-registered protocols, and full statistical output.</p>
+      <section class="page-header">
+        <h1>Deeper Research</h1>
+        <p class="lead">Original technical research notes, pre-registered protocols, and full statistical output.</p>
+      </section>
       <ul class="entry-list">
         {% for entry in deeper_entries %}
           <li>
@@ -129,7 +180,10 @@
     {% endif %}
 
     {% if page == 'weekly' %}
-      <h1>Weekly Notes</h1>
+      <section class="page-header">
+        <h1>Weekly Notes</h1>
+        <p class="lead">Operational updates, data-source reviews, and short research notes.</p>
+      </section>
       <ul class="entry-list">
         {% for item in weekly_list %}
           <li>
@@ -140,7 +194,10 @@
     {% endif %}
 
     {% if page == 'monthly' %}
-      <h1>Monthly Reviews</h1>
+      <section class="page-header">
+        <h1>Monthly Reviews</h1>
+        <p class="lead">Monthly synthesis notes, performance reviews, and methodology updates.</p>
+      </section>
       <ul class="entry-list">
         {% for item in monthly_list %}
           <li>
@@ -220,10 +277,28 @@
     {% endif %}
 
     {% if page == 'entry' %}
-      <article class="entry">
-        <h1>{{ title }}</h1>
-        {{ body_html|safe }}
-      </article>
+      <div class="entry-body">
+        <article class="entry-main">
+          <h1>{{ title }}</h1>
+          {{ body_html|safe }}
+        </article>
+        <aside class="entry-sidebar">
+          <div class="sidebar-card">
+            <h3>Research</h3>
+            <ul>
+              <li><a href="library/">Public library</a></li>
+              <li><a href="deeper-research/">Deeper research</a></li>
+              <li><a href="weekly/">Weekly notes</a></li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="founders/">Founders</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
     {% endif %}
   </main>
 

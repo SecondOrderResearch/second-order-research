@@ -122,6 +122,72 @@ hr {
   font-size: 14px;
 }
 
+.page-header {
+  margin-bottom: 18px;
+}
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+.page-header .lead {
+  color: var(--muted);
+  max-width: 780px;
+}
+
+.chart-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin: 14px 0;
+}
+.chart-wrap svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.entry-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .entry-body { grid-template-columns: 1fr; }
+}
+.entry-main {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.entry-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sidebar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.sidebar-card h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.sidebar-card p, .sidebar-card ul {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+}
+.sidebar-card ul {
+  padding-left: 18px;
+}
+
 .entry-list {
   list-style: none;
   padding: 0;

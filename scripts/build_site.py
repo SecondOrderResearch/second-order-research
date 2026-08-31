@@ -13,6 +13,11 @@ SITE_DIR = REPO / "site"
 OUT_DIR = REPO / "docs"
 TEMPLATE_DIR = SITE_DIR / "templates"
 ASSETS_DIR = SITE_DIR / "assets"
+CHARTS_MODULE = ASSETS_DIR / "charts.py"
+
+import sys
+sys.path.append(str(ASSETS_DIR))
+from charts import bar_chart, pipeline_diagram  # noqa: E402
 
 RESEARCH_DIR = REPO / "research"
 DEEPER_LIBRARY_DIR = RESEARCH_DIR / "library"
@@ -145,6 +150,18 @@ def build_site() -> None:
     monthly_list = _render_brief_list(MONTHLY_DIR, "monthly")
     readme_html = _md_to_html(README_PATH.read_text(encoding="utf-8"))
 
+    methodology_chart = pipeline_diagram(
+        [
+            "Hypothesis",
+            "Pre-register",
+            "Collect",
+            "Correct",
+            "Falsify",
+            "Publish",
+        ],
+        title="Second Order Research Pipeline",
+    )
+
     # Homepage
     home = base.render(
         page="home",
@@ -154,6 +171,7 @@ def build_site() -> None:
         deeper_entries=deeper_entries,
         weekly_list=weekly_list,
         monthly_list=monthly_list,
+        methodology_chart=methodology_chart,
     )
     (OUT_DIR / "index.html").write_text(home, encoding="utf-8")
 
