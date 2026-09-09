@@ -4,7 +4,6 @@
 **Title:** xG-difference over previous N games predicts next-game win (PL, Sofascore xG)
 **Status:** Supported
 **Pre-registered:** Yes
-**Created:** 2026-08-11 16:27
 **Hypothesis:** Teams with few points but a high xG-difference over the previous N games have a higher chance of winning the next game, especially where the opponent shows the inverse.
 **Direction:** Positive: home xG-diff -> next win; interaction home xG-diff x away underperformance -> next win.
 **Data source:** match_performance (Sofascore), PL 2014/15-2025/26, 5 seasons.

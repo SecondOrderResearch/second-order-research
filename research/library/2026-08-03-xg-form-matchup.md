@@ -4,7 +4,7 @@
 **Title:** 3-game rolling xG/xGA form vs opponent outperformance matchup  
 **Status:** Rejected  
 **Pre-registered:** Yes  
-**Created:** 2026-08-03  
+ 
 **Hypothesis:** A team’s 3-match rolling xG differential predicts match-point outcome, but this relationship weakens when the opponent has been outperforming its xGA.  
 **Direction:** Interaction expected: high xG differential advantage should be muted or reversed against opponents who have conceded fewer goals than xGA suggested.  
 **Data source:** StatsBomb Open Data linked sample (2015/16 Premier League via football-data.org match linkage).  

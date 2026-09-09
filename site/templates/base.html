@@ -73,7 +73,6 @@
           {% for entry in public_entries %}
             <li>
               <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
-              <span class="entry-meta">{{ entry.created_display }}</span>
             </li>
           {% endfor %}
         </ul>
@@ -86,7 +85,6 @@
           {% for entry in deeper_entries %}
             <li>
               <a href="deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
-              <span class="entry-meta">{{ entry.created_display }}</span>
             </li>
           {% endfor %}
         </ul>
@@ -134,7 +132,6 @@
         {% for entry in public_entries %}
           <li>
             <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
-            <span class="entry-meta">{{ entry.created_display }}</span>
           </li>
         {% endfor %}
       </ul>
@@ -149,7 +146,6 @@
         {% for entry in deeper_entries %}
           <li>
             <a href="deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
-            <span class="entry-meta">{{ entry.created_display }}</span>
           </li>
         {% endfor %}
       </ul>
