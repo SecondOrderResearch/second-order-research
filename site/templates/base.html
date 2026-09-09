@@ -78,28 +78,6 @@
         </ul>
       </section>
 
-      <section>
-        <h2>Deeper research</h2>
-        <p class="lead">Original technical notes, pre-registered protocols, and full statistical output.</p>
-        <ul class="entry-list">
-          {% for entry in deeper_entries %}
-            <li>
-              <a href="deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section>
-        <h2>Latest weekly notes</h2>
-        <ul class="entry-list">
-          {% for item in weekly_list %}
-            <li>
-              <a href="weekly/{{ item.slug }}.html">{{ item.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
     {% endif %}
 
     {% if page == 'library' %}
