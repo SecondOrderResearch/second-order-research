@@ -84,6 +84,21 @@ def _entry_created(path: Path) -> str | None:
     return None
 
 
+def _entry_created_display(path: Path) -> str | None:
+    created = _entry_created(path)
+    if not created:
+        return None
+    # Take first part before space, e.g. "2026-08-03" or "2026-08-11 16:27"
+    date_part = created.split()[0]
+    year, month, _ = date_part.split("-")
+    month_names = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ]
+    month_name = month_names[int(month) - 1]
+    return f"{month_name} {year}"
+
+
 def _render_public_entries() -> list[dict]:
     entries: list[dict] = []
     for path in _collect_md_files(DEEPER_LIBRARY_DIR):
@@ -94,6 +109,7 @@ def _render_public_entries() -> list[dict]:
                 "title": _entry_title(path, path.stem),
                 "status": _entry_status(path) or "Unknown",
                 "created": _entry_created(path) or "",
+                "created_display": _entry_created_display(path) or "",
                 "body_html": html,
             }
         )
@@ -110,6 +126,7 @@ def _render_deeper_entries() -> list[dict]:
                 "title": _entry_title(path, path.stem),
                 "status": _entry_status(path) or "Unknown",
                 "created": _entry_created(path) or "",
+                "created_display": _entry_created_display(path) or "",
                 "body_html": html,
             }
         )
