@@ -42,6 +42,51 @@ CREATE TABLE IF NOT EXISTS teams (
     source_notes TEXT
 );
 
+CREATE TABLE IF NOT EXISTS sofascore_data (
+    match_id TEXT PRIMARY KEY,
+    season TEXT,
+    home_team TEXT,
+    away_team TEXT,
+    home_goals INTEGER,
+    away_goals INTEGER,
+    home_xg REAL,
+    away_xg REAL,
+    home_shots INTEGER,
+    away_shots INTEGER,
+    home_corners INTEGER,
+    away_corners INTEGER,
+    home_possession REAL,
+    away_possession REAL,
+    source_file TEXT
+);
+
+CREATE TABLE IF NOT EXISTS football_data (
+    match_id TEXT PRIMARY KEY,
+    competition TEXT,
+    season TEXT,
+    match_date TEXT,
+    kickoff_time TEXT,
+    home_team TEXT,
+    away_team TEXT,
+    home_goals INTEGER,
+    away_goals INTEGER,
+    result TEXT,
+    home_shots INTEGER,
+    away_shots INTEGER,
+    home_shots_on_target INTEGER,
+    away_shots_on_target INTEGER,
+    home_corners INTEGER,
+    away_corners INTEGER,
+    home_fouls INTEGER,
+    away_fouls INTEGER,
+    home_yellows INTEGER,
+    away_yellows INTEGER,
+    home_reds INTEGER,
+    away_reds INTEGER,
+    referee TEXT,
+    source_file TEXT
+);
+
 CREATE TABLE IF NOT EXISTS matches (
     match_id TEXT PRIMARY KEY,
     competition TEXT,
