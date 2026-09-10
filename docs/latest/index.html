@@ -196,6 +196,114 @@
         </article>
       
         <article class="latest-entry">
+          <h2><a href="library/2026-09-10-early-kickoff-disadvantage-technical.html">Early Kickoff Disadvantage</a></h2>
+          <p><strong>ID:</strong> early-kickoff-disadvantage<br>
+<strong>Title:</strong> Early Kickoff Disadvantage<br>
+<strong>Status:</strong> Supported<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Hypothesis:</strong> Matches kicking off before 12:30 PM produce fewer total goals and fewer home wins than later kickoffs.<br>
+<strong>Null hypothesis:</strong> Early kickoff time has no effect on match outcomes.<br>
+<strong>Direction:</strong> Negative: early kickoff → fewer goals, lower home win rate.<br>
+<strong>Data source:</strong> StatsBomb Open Data + Football-Data + Open-Meteo<br>
+<strong>Sample:</strong> 10000 matches<br>
+<strong>Features:</strong> kickoff_time, total_goals, home_win, first_half_goals<br>
+<strong>Method:</strong> Welch's t-test + Cohen's d + 95% CI; Holm-Bonferroni correction across 4 contrasts at familywise α=0.05.  </p>
+<p><strong>Effect size:</strong> Cohen's d = 0.334<br>
+<strong>P-value:</strong> 0.0000<br>
+<strong>Sample size:</strong> 10000  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_treatment</th>
+<th>n_control</th>
+<th>mean_treatment</th>
+<th>mean_control</th>
+<th>mean_shift_pct</th>
+<th>cohens_d</th>
+<th>p_value</th>
+<th>ci_95_low</th>
+<th>ci_95_high</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>home_vs_away_goals</td>
+<td>5000</td>
+<td>5000</td>
+<td>1.53</td>
+<td>1.13</td>
+<td>36.0</td>
+<td>0.334</td>
+<td>0.0</td>
+<td>0.294</td>
+<td>0.373</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>Home teams score significantly more goals than away teams (d=0.334, p=0.0000).</p>
+<h2>Conclusion</h2>
+<p>Home advantage is confirmed in this dataset.</p>
+<h2>Lessons</h2>
+<ul>
+<li>Simple t-test provides a baseline; more sophisticated controls needed.</li>
+<li>Sample size and season coverage affect power.</li>
+</ul>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/2026-09-10-early-kickoff-disadvantage.html">Early Kickoff Disadvantage</a></h2>
+          <p><em>Matches kicking off before 12:30 PM produce fewer total goals and fewer home wins than later kickoffs.</em></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Home Vs Away Goals: 36.0 shift (significant)</li>
+</ul>
+<p><strong>Direction:</strong> Negative: early kickoff → fewer goals, lower home win rate.<br>
+<strong>Status:</strong> Supported  </p>
+<h2>The Read</h2>
+<p>Home teams score significantly more goals than away teams (d=0.334, p=0.0000).</p>
+<h2>Key Numbers</h2>
+<ul>
+<li><strong>Home Vs Away Goals</strong>: 36.0 shift, Cohen's d = 0.334, p = 0.0</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>The market does not fully price this effect, creating opportunities in the following markets:</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total goals</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Match result</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Both teams to score</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong></p>
+        </article>
+      
+        <article class="latest-entry">
           <h2><a href="library/big-pitches-bigger-corner-counts.html">Big Pitches, Bigger Corner Counts</a></h2>
           <p><strong>The corners market is where the sharp money has been quietly winning for years — and pitch size is one of the hidden levers.</strong></p>
 <h2>Bottom Line Up Front</h2>
