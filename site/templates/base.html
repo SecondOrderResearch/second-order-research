@@ -15,8 +15,7 @@
         <a href="./" class="{% if page == 'home' %}active{% endif %}">Home</a>
         <a href="library/" class="{% if page == 'library' %}active{% endif %}">Library</a>
         <a href="deeper-research/" class="{% if page == 'deeper-research' %}active{% endif %}">Deeper Research</a>
-        <a href="weekly/" class="{% if page == 'weekly' %}active{% endif %}">Weekly</a>
-        <a href="monthly/" class="{% if page == 'monthly' %}active{% endif %}">Monthly</a>
+        <a href="latest/" class="{% if page == 'latest' %}active{% endif %}">Latest</a>
         <a href="founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
         <a href="raith/" class="{% if page == 'raith' %}active{% endif %}">Raith Rovers</a>
       </nav>
@@ -57,10 +56,9 @@
             </p>
           </div>
           <div class="card">
-            <h3>Weekly &amp; monthly notes</h3>
+            <h3>Latest research</h3>
             <p>
-              Operational updates, data-source reviews, and monthly synthesis
-              notes.
+              Full content of all reports in one place.
             </p>
           </div>
         </div>
@@ -128,32 +126,17 @@
       </ul>
     {% endif %}
 
-    {% if page == 'weekly' %}
+    {% if page == 'latest' %}
       <section class="page-header">
-        <h1>Weekly Notes</h1>
-        <p class="lead">Operational updates, data-source reviews, and short research notes.</p>
+        <h1>Latest Research</h1>
+        <p class="lead">Full content of all reports in one place.</p>
       </section>
-      <ul class="entry-list">
-        {% for item in weekly_list %}
-          <li>
-            <a href="weekly/{{ item.slug }}.html">{{ item.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    {% if page == 'monthly' %}
-      <section class="page-header">
-        <h1>Monthly Reviews</h1>
-        <p class="lead">Monthly synthesis notes, performance reviews, and methodology updates.</p>
-      </section>
-      <ul class="entry-list">
-        {% for item in monthly_list %}
-          <li>
-            <a href="monthly/{{ item.slug }}.html">{{ item.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+      {% for entry in public_entries %}
+        <article class="latest-entry">
+          <h2><a href="library/{{ entry.slug }}.html">{{ entry.title }}</a></h2>
+          {{ entry.body_html|safe }}
+        </article>
+      {% endfor %}
     {% endif %}
 
     {% if page == 'founders' %}
@@ -236,7 +219,7 @@
             <ul>
               <li><a href="library/">Public library</a></li>
               <li><a href="deeper-research/">Deeper research</a></li>
-              <li><a href="weekly/">Weekly notes</a></li>
+              <li><a href="latest/">Latest</a></li>
             </ul>
           </div>
           <div class="sidebar-card">

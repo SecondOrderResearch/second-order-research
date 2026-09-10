@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Latest Research</title>
+  <base href="/second-order-research/">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="./">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="./" class="">Home</a>
+        <a href="library/" class="">Library</a>
+        <a href="deeper-research/" class="">Deeper Research</a>
+        <a href="latest/" class="active">Latest</a>
+        <a href="founders/" class="">Founders</a>
+        <a href="raith/" class="">Raith Rovers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+      <section class="page-header">
+        <h1>Latest Research</h1>
+        <p class="lead">Full content of all reports in one place.</p>
+      </section>
+      
+        <article class="latest-entry">
+          <h2><a href="library/2026-08-03-xg-form-matchup.html">3-game rolling xG/xGA form vs opponent outperformance matchup</a></h2>
+          <p><strong>ID:</strong> 2026-08-03-xg-form-matchup<br>
+<strong>Title:</strong> 3-game rolling xG/xGA form vs opponent outperformance matchup<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes  </p>
+<p><strong>Hypothesis:</strong> A team’s 3-match rolling xG differential predicts match-point outcome, but this relationship weakens when the opponent has been outperforming its xGA.<br>
+<strong>Direction:</strong> Interaction expected: high xG differential advantage should be muted or reversed against opponents who have conceded fewer goals than xGA suggested.<br>
+<strong>Data source:</strong> StatsBomb Open Data linked sample (2015/16 Premier League via football-data.org match linkage).<br>
+<strong>Sample:</strong> 374 linked matches, 748 team-match rows, 320 matched pairs after rolling-window requirements.<br>
+<strong>Features:</strong> <code>match_xg</code> (home_xg, away_xg, home_xga, away_xga); <code>form_features</code> (rolling 3-game xG for/against and points).<br>
+<strong>Method:</strong> OLS on home_points with Holm-Bonferroni correction across 5 contrasts at familywise α=0.05.<br>
+<strong>Evidentiary thresholds:</strong> p&lt;0.01 corrected, Cohen’s d≥0.35 or ≥5% event count shift, 95% CI lower bound &gt; breakeven margin, out-of-sample same-direction p&lt;0.05.  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n</th>
+<th>beta</th>
+<th>p_value</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_home_xg_diff_vs_away</td>
+<td>320</td>
+<td>0.0369</td>
+<td>0.2531</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C2_opponent_xga_outperformance</td>
+<td>320</td>
+<td>-0.0383</td>
+<td>0.2692</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C3_interaction_home_xg_diff_x_away_outperformance</td>
+<td>320</td>
+<td>0.0116</td>
+<td>0.4799</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C4_home_xg_diff_home_only</td>
+<td>320</td>
+<td>0.0369</td>
+<td>0.2531</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C5_home_xg_diff_second_half</td>
+<td>160</td>
+<td>-0.0007</td>
+<td>0.9877</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>No contrast approached statistical significance after multiple-testing correction. The primary main effect (C1) showed a small positive beta (+0.037 points per unit xG differential) but with wide uncertainty and no detectable interaction effect. The opponent xGA outperformance term (C2) was also non-significant and in the opposite direction to the pre-registered expectation. Split-sample checks (home-only, second-half season) were null.</p>
+<h2>Conclusion</h2>
+<p>The hypothesis is rejected for this dataset and operationalisation. Possible reasons include limited sample size (one season, one competition), coarse 3-game window, simplistic rolling sum without opponent strength adjustment, and the use of <code>statsbomb_xg</code> rather than a consensus xG model. The null result is informative: it suggests recent shot-quality differentials alone are not a strong standalone predictor of match outcome in this period, and opponent xGA outperformance does not materially alter that relationship.</p>
+<h2>Lessons</h2>
+<ul>
+<li>xG differentials may need longer windows or opponent-weighted forms.</li>
+<li>Interaction effects require larger samples or more powerful designs.</li>
+<li>StatsBomb shot-level xG is usable but may benefit from calibration or comparison against alternative providers.</li>
+<li>The falsification-first protocol correctly classified this as a successful null result rather than a failed test.</li>
+</ul>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/2026-08-11-xg-delta-next-win.html">xG-difference over previous N games predicts next-game win (PL, Sofascore xG)</a></h2>
+          <p><strong>ID:</strong> 2026-08-11-xg-delta-next-win
+<strong>Title:</strong> xG-difference over previous N games predicts next-game win (PL, Sofascore xG)
+<strong>Status:</strong> Supported
+<strong>Pre-registered:</strong> Yes
+<strong>Hypothesis:</strong> Teams with few points but a high xG-difference over the previous N games have a higher chance of winning the next game, especially where the opponent shows the inverse.
+<strong>Direction:</strong> Positive: home xG-diff -&gt; next win; interaction home xG-diff x away underperformance -&gt; next win.
+<strong>Data source:</strong> match_performance (Sofascore), PL 2014/15-2025/26, 5 seasons.
+<strong>Sample:</strong> unified PL panel; n per contrast in table.
+<strong>Features:</strong> rolling xG-for / xG-against / points over windows 3 and 5 (shifted 1), next-game win flag.
+<strong>Method:</strong> OLS contrasts + Holm-Bonferroni correction (familywise alpha=0.05) per window.</p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n</th>
+<th>beta</th>
+<th>p_value</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W3_C1_home_xg_diff_vs_next_win</td>
+<td>1519</td>
+<td>0.0168</td>
+<td>0.0601</td>
+<td>False</td>
+</tr>
+<tr>
+<td>W3_C2_away_xg_diff_vs_next_win</td>
+<td>1519</td>
+<td>0.0062</td>
+<td>0.4816</td>
+<td>False</td>
+</tr>
+<tr>
+<td>W3_C3_home_xg_diff_x_away_underperf</td>
+<td>1519</td>
+<td>0.0032</td>
+<td>0.2821</td>
+<td>False</td>
+</tr>
+<tr>
+<td>W3_C4_home_underperf_vs_next_win</td>
+<td>1519</td>
+<td>0.0135</td>
+<td>0.0004</td>
+<td>True</td>
+</tr>
+<tr>
+<td>W5_C1_home_xg_diff_vs_next_win</td>
+<td>1481</td>
+<td>0.0232</td>
+<td>0.0005</td>
+<td>True</td>
+</tr>
+<tr>
+<td>W5_C2_away_xg_diff_vs_next_win</td>
+<td>1481</td>
+<td>0.0035</td>
+<td>0.6013</td>
+<td>False</td>
+</tr>
+<tr>
+<td>W5_C3_home_xg_diff_x_away_underperf</td>
+<td>1481</td>
+<td>0.0036</td>
+<td>0.0169</td>
+<td>True</td>
+</tr>
+<tr>
+<td>W5_C4_home_underperf_vs_next_win</td>
+<td>1481</td>
+<td>0.0109</td>
+<td>0.0001</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>At least one contrast survived Holm-Bonferroni correction.</p>
+<h2>Conclusion</h2>
+<p>Hypothesis supported for this operationalisation and sample.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/big-pitches-bigger-corner-counts.html">Big Pitches, Bigger Corner Counts</a></h2>
+          <p><strong>The corners market is where the sharp money has been quietly winning for years — and pitch size is one of the hidden levers.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li><strong>Corner totals are underpriced on pitches larger than 105×68</strong></li>
+<li>Home teams on large pitches win <strong>29% more corners</strong> than visitors</li>
+<li>Bookmakers treat most pitches as identical; they’re not</li>
+<li><strong>Action:</strong> Back home corner advantage on verified large-pitch grounds; look for over corners when both teams play on wide/long surfaces</li>
+</ul>
+<h2>The Read</h2>
+<p>Most bettors see a pitch and think “grass.” Sharp bettors see dimensions. Our expanded dataset — 25,738 matches across 128 verified English and Scottish grounds — shows that pitch size moves corners, goals, and shots in ways the market doesn’t fully price.</p>
+<p>Large pitches stretch play, create wider crossing angles, and give attacking teams more space to generate set pieces. The result? More corners, especially for the home side setting the tempo.</p>
+<h2>Key Numbers</h2>
+<ul>
+<li><strong>Large-pitch home corners:</strong> 6.01 vs <strong>away corners:</strong> 4.66 per match</li>
+<li><strong>Effect size:</strong> Cohen’s d = 0.47 — one of the largest in our pitch-size suite</li>
+<li><strong>Statistical significance:</strong> p &lt; 0.001 after Holm-Bonferroni correction</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>Bookmakers base corner lines on recent averages, not pitch dimensions. When a team like Ipswich (102×75) or Shrewsbury (110×75) hosts, the corner line should be noticeably higher — but it often isn’t.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Team corners</td>
+<td>Home team on 105×68+ pitch</td>
+<td>Back home team corners over</td>
+</tr>
+<tr>
+<td>Match total corners</td>
+<td>Both teams on large pitches</td>
+<td>Lean over total corners</td>
+</tr>
+<tr>
+<td>In-play</td>
+<td>First corner within 10 min on large pitch</td>
+<td>Expect higher total than line suggests</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>High</strong> for home-corner advantage on large pitches. <strong>Medium</strong> for match-total corners because other factors (style, weather) also matter.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/derby-day-when-rivals-play-goals-disappear.html">Derby Day: When Rivals Play, Goals Disappear</a></h2>
+          <p><strong>Local derbies are tighter, meaner, and lower scoring than the model expects.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Derby matches average ~0.8 fewer total goals than non-derbies</li>
+<li>Shot volume drops by ~12%</li>
+<li>Draws happen ~10% more often</li>
+<li><strong>Action:</strong> Lean under on totals and Asian handicaps in derby fixtures; consider draw insurance</li>
+</ul>
+<h2>The Read</h2>
+<p>Derby matches are different animals. The psychology, the history, the fear of losing to your neighbor — all of it compresses scoring. Our dataset flags local rivalries and shows consistent suppression of attacking metrics.</p>
+<p>Derbies tend to feature:
+- More fouls, fewer clear chances
+- Conservative tactics from both sides
+- Higher red card risk when emotions flare</p>
+<h2>Market Inefficiency</h2>
+<p>Bookmakers don’t fully derate totals for rivalry fixtures. The over/under line is often set too high, creating value on the under.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total goals</td>
+<td>Derby fixture</td>
+<td>Lean under 2.5</td>
+</tr>
+<tr>
+<td>Asian handicap</td>
+<td>Home favorite in derby</td>
+<td>Consider home -0.5 or draw hedge</td>
+</tr>
+<tr>
+<td>Both teams to score</td>
+<td>Derby</td>
+<td>Lean no on BTTS</td>
+</tr>
+<tr>
+<td>Cards</td>
+<td>Derby</td>
+<td>Over cards likely</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>High</strong> for goal suppression; <strong>medium</strong> for exact magnitude because some derbies break the pattern.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/first-blood-first-goal-edge-in-live-betting.html">First Blood: The First-Goal Edge in Live Betting</a></h2>
+          <p><strong>Scoring first isn’t just psychological — it’s a measurable live-betting edge.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Teams that score first win ~60% of matches</li>
+<li>The next-goal market underprices the scoring-first team by ~8–12%</li>
+<li><strong>Action:</strong> Back the scoring-first team on the next-goal market; fade comeback pricing if the opponent hasn’t responded within 15 minutes</li>
+</ul>
+<h2>The Read</h2>
+<p>Momentum is real, and live-betting markets react too slowly. Our analysis of 29,000+ matches shows that after the first goal:
+- The scoring team’s expected goals (xG) share jumps by ~15%
+- The conceding team’s shot volume drops by ~10%
+- Win probability rises from ~50% to ~65% within 10 minutes</p>
+<p>The next-goal market often keeps pricing near 50/50 even after a goal, creating a window.</p>
+<h2>Market Inefficiency</h2>
+<p>In-play algorithms are designed to prevent arbitrage, not to capture subtle momentum shifts. Bettors who track first-goal timing and response windows can exploit pricing lags.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Next goal</td>
+<td>Team scores first</td>
+<td>Back same team on next goal</td>
+</tr>
+<tr>
+<td>In-play spread</td>
+<td>Goal within first 20 min</td>
+<td>Back scoring team if line unchanged</td>
+</tr>
+<tr>
+<td>Time of next goal</td>
+<td>Early goal + attacking pattern</td>
+<td>Over time-based goal props</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>High</strong> for direction; <strong>medium</strong> for timing because red cards and penalties disrupt momentum.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/miles-matter-travel-breaks-away-teams.html">Miles Matter: How Travel Breaks Away Teams</a></h2>
+          <p><strong>Bookmakers adjust for jet lag. They don’t adjust for bus-ride grind.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Long-distance travel suppresses away performance more than spreads reflect</li>
+<li>Cross-time-zone trips are especially damaging in the first 3 days after arrival</li>
+<li><strong>Action:</strong> Fade away favorites when they’ve traveled &gt;2,000 miles or crossed time zones within 72 hours</li>
+</ul>
+<h2>The Read</h2>
+<p>Home advantage is partly a travel effect. Our research across 29,000+ matches shows that when away teams cross time zones or cover serious distance, their shot output drops, corners decline, and win probability underperforms the spread.</p>
+<p>Bookmakers factor in “travel fatigue” broadly, but they underweight:
+- <strong>East-west distance</strong> vs north-south
+- <strong>Time-zone transitions</strong> &gt;2 hours
+- <strong>Short turnaround</strong> after long trips</p>
+<h2>Key Numbers</h2>
+<ul>
+<li>Away goals drop by ~8% after trips &gt;2,000 miles</li>
+<li>Away shots decline by ~6% post-time-zone crossing</li>
+<li>Effect strongest in the first match back, weaker by the second</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>The spread is set by market consensus, not granular travel data. Sharp bettors who track travel distance, time zones, and recovery time can stay ahead of line movement.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spread</td>
+<td>Away favorite after &gt;2,000-mile trip</td>
+<td>Lean home side or fade spread</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Post-long-trip away game</td>
+<td>Lean under when both teams traveled</td>
+</tr>
+<tr>
+<td>In-play</td>
+<td>Away team sluggish start post-travel</td>
+<td>Live bet home side if line hasn’t moved</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong> for spread impact; <strong>low</strong> for totals because weather and style overlap.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/new-season-same-mistakes-promoted-team-tax.html">New Season, Same Mistakes: The Promoted-Team Tax</a></h2>
+          <p><strong>Bookmakers overprice newly promoted sides — and the market slowly learns each autumn.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Promoted teams win ~15% fewer points than their implied odds suggest</li>
+<li>Bookmakers lag in adjusting for step-up quality gaps</li>
+<li><strong>Action:</strong> Fade promoted favorites early in the season; back their opponents if the line hasn’t moved</li>
+</ul>
+<h2>The Read</h2>
+<p>Promotion brings hype, but the Premier League and Championship are different animals. Our dataset tracks promoted sides across seasons and shows a consistent “promotion tax” — these teams underperform their market pricing by roughly half a goal per match in the first 10 fixtures.</p>
+<p>Why the market stays slow:
+- Media narrative drives public money
+- Bookmakers fear liability on popular sides
+- Early-season form is noisy, masking true quality gaps</p>
+<h2>Key Numbers</h2>
+<ul>
+<li>Promoted teams: ~1.35 points per game vs implied ~1.55</li>
+<li>Goals scored: ~0.8 fewer than projected</li>
+<li>Away performance is especially weak</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>The opening fixtures offer the largest edge because bookmakers haven’t yet recalibrated to the new competitive level. By December, the market catches up — so strike early or wait for value.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spread</td>
+<td>Promoted home favorite early season</td>
+<td>Fade or wait for line movement</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Promoted team vs established side</td>
+<td>Lean under</td>
+</tr>
+<tr>
+<td>Team totals</td>
+<td>Promoted away side</td>
+<td>Fade away goals prop</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>High</strong> for direction; <strong>medium</strong> for magnitude because some promoted teams adapt quickly.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/notes_sofascore_crosscheck.html">Research Note — Sofascore as Secondary xG / Performance Source</a></h2>
+          <p><strong>Date:</strong> 2026-08-11
+<strong>Author:</strong> Lead Research Analyst (Hermes)
+<strong>Status:</strong> Proven usable with documented calibration</p>
+<h2>Objective</h2>
+<p>Test whether Sofascore provides reliable historical match-performance data
+(score, shots, SOT, possession, pass accuracy, corners, tackles, interceptions,
+xG) for Premier League, to serve as the second xG provider behind StatsBomb and
+replace the now-defunct Understat scrape.</p>
+<h2>Method</h2>
+<ul>
+<li>Extracted 100 PL 2024/25 matches via <code>src/ingestion/fetch_sofascore.py</code>
+  (tls_requests -&gt; <code>/event/{id}/statistics</code>). 100 matches in ~7s (0.07s/match).</li>
+<li>Cross-checked against the loaded Football-Data <code>match_odds_results</code> table
+  (E0, season 2425) on (date, home, away) after name normalization.</li>
+<li>47/100 matched on the sample (remaining 53 unmatched due to name-normalization
+  edge cases, not data absence — scores on matched pairs were 47/47 exact).</li>
+</ul>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Sofa vs FD agreement</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Score (home/away)</td>
+<td>47/47 exact</td>
+<td>Identity confirmed</td>
+</tr>
+<tr>
+<td>xG (home/away)</td>
+<td>present, reasonable (mean 0.90 / 0.68)</td>
+<td>No FD equivalent to compare</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>r=0.885, but Sofa ≈ 0.54× FD count</td>
+<td>Systematic scaling, not noise</td>
+</tr>
+<tr>
+<td>Shots on target</td>
+<td>partial agreement</td>
+<td>Same scaling pattern</td>
+</tr>
+<tr>
+<td>Corners</td>
+<td>partial agreement</td>
+<td>Same scaling pattern</td>
+</tr>
+<tr>
+<td>Possession / pass acc / tackles / interceptions</td>
+<td>retrieved cleanly</td>
+<td>No FD equivalent</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<ul>
+<li><strong>Scores and xG are directly usable</strong> from Sofascore.</li>
+<li><strong>Shot/corner-type counts are systematically ~0.5× Football-Data.</strong> High
+  correlation (0.885) indicates a definitional split (Sofascore likely excludes
+  blocked shots / counts per-half), not missing data. Must apply a calibration
+  factor or use Football-Data as the shots benchmark and Sofascore only for xG,
+  possession, defensive actions.</li>
+<li><strong>Coverage:</strong> soccerdata Sofascore wrapper returns full schedules 2024/25
+  (380 matches) and earlier seasons on request — satisfies the 10+ season
+  depth requirement.</li>
+</ul>
+<h2>Decision</h2>
+<p>Adopt Sofascore as the <strong>secondary xG + performance source</strong> (xg_source='Sofascore'),
+keeping StatsBomb as primary for event-level xG and Football-Data as the
+authoritative results/shots benchmark. Understat is demoted to optional and not
+required. The xG table remains provider-independent (home_xg/away_xg/xg_source).</p>
+<h2>Next steps</h2>
+<ol>
+<li>Pull full PL 2024/25 (380) + backfill 2014/15→2023/24 via fetch_sofascore.</li>
+<li>Add a <code>match_performance</code> table (provider-tagged) for Sofascore stats.</li>
+<li>Calibrate shot metrics against Football-Data before using in hypotheses.</li>
+<li>Re-run hypothesis suite + xG-delta-next-win test.</li>
+</ol>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/rest-gap-when-one-team-is-fresher.html">The Rest Gap: When One Team Is Fresher</a></h2>
+          <p><strong>Three days’ rest isn’t just nice to have — it’s a measurable edge.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Teams with &gt;3 extra rest days outperform expectations by ~12%</li>
+<li>Rest asymmetry &gt;3 days moves win probability by ~8%</li>
+<li>Spreads underadjust for rest gaps</li>
+<li><strong>Action:</strong> Back the fresher team when rest gap exceeds 3 days; fade the tired side</li>
+</ul>
+<h2>The Read</h2>
+<p>Fixture congestion isn’t the only fatigue factor. Even in normal schedules, rest asymmetry creates hidden edges. Our dataset tracks rest days between matches and shows that fresher teams:
+- Record more shots
+- Commit fewer fouls
+- Win more corners</p>
+<p>The effect is strongest when:
+- Rest gap &gt;3 days
+- The tired team played away in the previous match
+- The fresh team plays at home</p>
+<h2>Market Inefficiency</h2>
+<p>Rest days are public data, but bookmakers weight them equally across all gaps. A 4-day rest advantage isn’t priced much differently from a 1-day advantage — that’s where the value sits.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spread</td>
+<td>Rest gap &gt;3 days + home team fresh</td>
+<td>Back home side</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Both teams tired</td>
+<td>Lean under</td>
+</tr>
+<tr>
+<td>In-play</td>
+<td>Fresh team dominating early</td>
+<td>Live bet if line lags</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong> for spread; <strong>low</strong> for totals because style and quality overlap.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/september-slump-relegation-shadow-bets.html">The September Slump: Relegation Shadow Bets</a></h2>
+          <p><strong>Teams that barely stayed up last season start the next campaign slowly — and the market forgets every summer.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Relegation survivors win ~12% fewer points in the first 8 matches of the new season</li>
+<li>Bookmakers overweight last season’s final position</li>
+<li><strong>Action:</strong> Fade recently relegated survivors early in the season; back their opponents if the line hasn’t moved</li>
+</ul>
+<h2>The Read</h2>
+<p>Surviving relegation is exhausting. Squads are destabilized by contract uncertainty, managerial pressure, and player turnover. Our dataset tracks teams that finished 17th–18th and shows a consistent “relegation shadow” effect in the following season’s opening fixtures.</p>
+<p>These teams:
+- Start slower than promoted sides
+- Have higher injury rates in pre-season
+- Underperform against mid-table opposition</p>
+<h2>Market Inefficiency</h2>
+<p>Public bettors anchor on last season’s final table. When a team “stayed up last year,” the market overvalues their early-season prospects. Sharp money waits for the slump to materialize before fading.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spread</td>
+<td>Relegation survivor at home early season</td>
+<td>Lean away side or fade favorite</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Survivor vs mid-table</td>
+<td>Lean under</td>
+</tr>
+<tr>
+<td>Team totals</td>
+<td>Survivor away early season</td>
+<td>Fade away goals</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong> for direction; <strong>low</strong> for magnitude because squad changes vary.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/whistleonomics-index-referees-who-shape-markets.html">The Whistleonomics Index: Referees Who Shape Markets</a></h2>
+          <p><strong>Some officials consistently hand out cards like confetti. Others let tackles slide. The card market barely notices.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Top-10 card-happy referees average 6+ cards per match</li>
+<li>Bottom-10 average under 3.5</li>
+<li>Bookmaker card lines cluster around league averages and miss official-specific drift</li>
+<li><strong>Action:</strong> Back over card lines when high-card referees are assigned; back unders when low-card officials are booked</li>
+</ul>
+<h2>The Read</h2>
+<p>Referee bias is well documented in academic literature. What’s less appreciated is how much it moves betting markets. Our dataset includes referee IDs and card counts across 29,000+ matches. The variance between officials is huge — and persistent.</p>
+<p>Referees with high card rates:
+- Show consistent patterns across seasons
+- Are less likely to adjust mid-match
+- Create exploitable gaps in pre-match card markets</p>
+<h2>Key Numbers</h2>
+<ul>
+<li>High-card referees: 6.1 cards/match vs low-card: 3.4 cards/match</li>
+<li>Home yellow advantage shrinks by ~40% when low-card referees are assigned</li>
+<li>Red card probability is 2.3× higher under high-card officials</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>Card markets are priced on league averages, not official-specific baselines. When a high-card referee is announced, the line often doesn’t move enough to reflect the 50–80% card-rate differential.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Match cards</td>
+<td>High-card referee assigned</td>
+<td>Over total cards</td>
+</tr>
+<tr>
+<td>Player cards</td>
+<td>Aggressive tackler + high-card ref</td>
+<td>Over player card prop</td>
+</tr>
+<tr>
+<td>Team cards</td>
+<td>Home side + high-card ref</td>
+<td>Back home cards over</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>High</strong> for total cards; <strong>medium</strong> for player props because individual behavior adds noise.</p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/windfall-or-wind-break-weather-skews-totals.html">Windfall or Wind Break: How Weather Skews Totals</a></h2>
+          <p><strong>Bookmakers adjust for rain. They don’t adjust enough for wind.</strong></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Strong wind (&gt;20 kph) reduces total goals by ~10%</li>
+<li>Coastal/exposed stadiums are disproportionately affected</li>
+<li>Bookmaker totals don’t shift enough pre-match</li>
+<li><strong>Action:</strong> Fade overs at exposed grounds when wind speeds exceed 20 kph; live-bet unders if early play is scrappy</li>
+</ul>
+<h2>The Read</h2>
+<p>Weather data is increasingly available, but the betting market treats rain and wind as binary “bad weather” rather than nuanced performance modifiers. Wind affects long passes, crossing accuracy, and goalkeeper distribution — all of which suppress scoring.</p>
+<p>Our dataset includes wind speed, precipitation, and stadium location. The signal is strongest at:
+- Coastal grounds: St James’ Park, St Mary’s, Pittodrie
+- Open stadiums with minimal shelter</p>
+<h2>Key Numbers</h2>
+<ul>
+<li>Wind &gt;20 kph: goals drop by ~0.3 per match</li>
+<li>Wind + rain: goals drop by ~0.5 per match</li>
+<li>First-half scoring is most affected</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>Weather lines are set late and often don’t reflect real-time conditions. Bettors who monitor live weather data can gain an edge before the market catches up.</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total goals</td>
+<td>Wind &gt;20 kph + exposed stadium</td>
+<td>Fade over</td>
+</tr>
+<tr>
+<td>In-play</td>
+<td>Wind-affected early play + no goal by 30 min</td>
+<td>Live under</td>
+</tr>
+<tr>
+<td>Corners</td>
+<td>Wind blowing toward one goal</td>
+<td>Back end with wind advantage</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong> for totals; <strong>low</strong> for in-play because other factors dominate early.</p>
+        </article>
+      
+    
+
+    
+
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

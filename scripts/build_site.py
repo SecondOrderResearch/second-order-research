@@ -21,8 +21,6 @@ from charts import bar_chart, pipeline_diagram  # noqa: E402
 
 RESEARCH_DIR = REPO / "research"
 DEEPER_LIBRARY_DIR = RESEARCH_DIR / "library"
-WEEKLY_DIR = RESEARCH_DIR / "weekly"
-MONTHLY_DIR = RESEARCH_DIR / "monthly"
 README_PATH = REPO / "README.md"
 
 
@@ -76,29 +74,6 @@ def _entry_status(path: Path) -> str | None:
     return None
 
 
-def _entry_created(path: Path) -> str | None:
-    text = path.read_text(encoding="utf-8")
-    for line in text.splitlines():
-        if line.startswith("**Created:**"):
-            return line.split("**Created:**", 1)[1].strip().strip("*")
-    return None
-
-
-def _entry_created_display(path: Path) -> str | None:
-    created = _entry_created(path)
-    if not created:
-        return None
-    # Take first part before space, e.g. "2026-08-03" or "2026-08-11 16:27"
-    date_part = created.split()[0]
-    year, month, _ = date_part.split("-")
-    month_names = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ]
-    month_name = month_names[int(month) - 1]
-    return f"{month_name} {year}"
-
-
 def _render_public_entries() -> list[dict]:
     entries: list[dict] = []
     for path in _collect_md_files(DEEPER_LIBRARY_DIR):
@@ -108,8 +83,6 @@ def _render_public_entries() -> list[dict]:
                 "slug": _entry_slug(path),
                 "title": _entry_title(path, path.stem),
                 "status": _entry_status(path) or "Unknown",
-                "created": _entry_created(path) or "",
-                "created_display": _entry_created_display(path) or "",
                 "body_html": html,
             }
         )
@@ -125,33 +98,17 @@ def _render_deeper_entries() -> list[dict]:
                 "slug": _entry_slug(path),
                 "title": _entry_title(path, path.stem),
                 "status": _entry_status(path) or "Unknown",
-                "created": _entry_created(path) or "",
-                "created_display": _entry_created_display(path) or "",
                 "body_html": html,
             }
         )
     return entries
 
 
-def _render_brief_list(directory: Path, label: str) -> list[dict]:
-    items: list[dict] = []
-    for path in _collect_md_files(directory):
-        items.append(
-            {
-                "slug": _entry_slug(path),
-                "title": _entry_title(path, path.stem),
-                "summary": path.read_text(encoding="utf-8").splitlines()[0],
-            }
-        )
-    return items
-
-
 def build_site() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "library").mkdir(exist_ok=True)
     (OUT_DIR / "deeper-research").mkdir(exist_ok=True)
-    (OUT_DIR / "weekly").mkdir(exist_ok=True)
-    (OUT_DIR / "monthly").mkdir(exist_ok=True)
+    (OUT_DIR / "latest").mkdir(exist_ok=True)
     (OUT_DIR / "founders").mkdir(exist_ok=True)
     shutil.copytree(ASSETS_DIR, OUT_DIR / "assets", dirs_exist_ok=True)
 
@@ -163,8 +120,7 @@ def build_site() -> None:
 
     public_entries = _render_public_entries()
     deeper_entries = _render_deeper_entries()
-    weekly_list = _render_brief_list(WEEKLY_DIR, "weekly")
-    monthly_list = _render_brief_list(MONTHLY_DIR, "monthly")
+    latest_entries = public_entries[-5:]
     readme_html = _md_to_html(README_PATH.read_text(encoding="utf-8"))
 
     methodology_chart = pipeline_diagram(
@@ -179,15 +135,13 @@ def build_site() -> None:
         title="Second Order Research Pipeline",
     )
 
-    # Homepage
+    # Homepage — only latest 5 entries
     home = base.render(
         page="home",
         title="Second Order Research",
         readme_html=readme_html,
-        public_entries=public_entries,
+        public_entries=latest_entries,
         deeper_entries=deeper_entries,
-        weekly_list=weekly_list,
-        monthly_list=monthly_list,
         methodology_chart=methodology_chart,
     )
     (OUT_DIR / "index.html").write_text(home, encoding="utf-8")
@@ -198,8 +152,6 @@ def build_site() -> None:
         title="Research Library",
         public_entries=public_entries,
         deeper_entries=deeper_entries,
-        weekly_list=weekly_list,
-        monthly_list=monthly_list,
     )
     (OUT_DIR / "library" / "index.html").write_text(lib_index, encoding="utf-8")
 
@@ -211,8 +163,6 @@ def build_site() -> None:
             body_html=entry["body_html"],
             public_entries=public_entries,
             deeper_entries=deeper_entries,
-            weekly_list=weekly_list,
-            monthly_list=monthly_list,
         )
         (OUT_DIR / "library" / f"{entry['slug']}.html").write_text(page, encoding="utf-8")
 
@@ -222,8 +172,6 @@ def build_site() -> None:
         title="Deeper Research",
         deeper_entries=deeper_entries,
         public_entries=public_entries,
-        weekly_list=weekly_list,
-        monthly_list=monthly_list,
     )
     (OUT_DIR / "deeper-research" / "index.html").write_text(deeper_index, encoding="utf-8")
 
@@ -234,62 +182,17 @@ def build_site() -> None:
             body_html=entry["body_html"],
             public_entries=public_entries,
             deeper_entries=deeper_entries,
-            weekly_list=weekly_list,
-            monthly_list=monthly_list,
         )
         (OUT_DIR / "deeper-research" / f"{entry['slug']}.html").write_text(page, encoding="utf-8")
 
-    # Weekly index
-    weekly_index = base.render(
-        page="weekly",
-        title="Weekly Notes",
-        weekly_list=weekly_list,
+    # Latest research — full content of all reports
+    latest_index = base.render(
+        page="latest",
+        title="Latest Research",
         public_entries=public_entries,
         deeper_entries=deeper_entries,
-        monthly_list=monthly_list,
     )
-    (OUT_DIR / "weekly" / "index.html").write_text(weekly_index, encoding="utf-8")
-
-    for item in weekly_list:
-        content = _md_to_html(
-            (WEEKLY_DIR / f"{item['slug']}.md").read_text(encoding="utf-8")
-        )
-        page = base.render(
-            page="entry",
-            title=item["title"],
-            body_html=content,
-            public_entries=public_entries,
-            deeper_entries=deeper_entries,
-            weekly_list=weekly_list,
-            monthly_list=monthly_list,
-        )
-        (OUT_DIR / "weekly" / f"{item['slug']}.html").write_text(page, encoding="utf-8")
-
-    # Monthly index
-    monthly_index = base.render(
-        page="monthly",
-        title="Monthly Reviews",
-        monthly_list=monthly_list,
-        public_entries=public_entries,
-        deeper_entries=deeper_entries,
-        weekly_list=weekly_list,
-    )
-    (OUT_DIR / "monthly" / "index.html").write_text(monthly_index, encoding="utf-8")
-
-    for item in monthly_list:
-        content = _md_to_html(
-            (MONTHLY_DIR / f"{item['slug']}.md").read_text(encoding="utf-8")
-        )
-        page = base.render(
-            page="entry",
-            title=item["title"],
-            body_html=content,
-            public_entries=public_entries,
-            deeper_entries=deeper_entries,
-            weekly_list=weekly_list,
-            monthly_list=monthly_list,
-        )
-        (OUT_DIR / "monthly" / f"{item['slug']}.html").write_text(page, encoding="utf-8")
+    (OUT_DIR / "latest" / "index.html").write_text(latest_index, encoding="utf-8")
 
     # Founders
     founders = env.get_template("founders.html")
@@ -298,8 +201,6 @@ def build_site() -> None:
         title="Founders",
         public_entries=public_entries,
         deeper_entries=deeper_entries,
-        weekly_list=weekly_list,
-        monthly_list=monthly_list,
     )
     (OUT_DIR / "founders" / "index.html").write_text(founders_page, encoding="utf-8")
 
