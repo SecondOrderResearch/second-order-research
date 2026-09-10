@@ -89,25 +89,9 @@ def _render_public_entries() -> list[dict]:
     return entries
 
 
-def _render_deeper_entries() -> list[dict]:
-    entries: list[dict] = []
-    for path in _collect_md_files(DEEPER_LIBRARY_DIR):
-        html = _md_to_html(path.read_text(encoding="utf-8"), strip_top_heading=True)
-        entries.append(
-            {
-                "slug": _entry_slug(path),
-                "title": _entry_title(path, path.stem),
-                "status": _entry_status(path) or "Unknown",
-                "body_html": html,
-            }
-        )
-    return entries
-
-
 def build_site() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "library").mkdir(exist_ok=True)
-    (OUT_DIR / "deeper-research").mkdir(exist_ok=True)
     (OUT_DIR / "latest").mkdir(exist_ok=True)
     (OUT_DIR / "founders").mkdir(exist_ok=True)
     shutil.copytree(ASSETS_DIR, OUT_DIR / "assets", dirs_exist_ok=True)
@@ -119,7 +103,6 @@ def build_site() -> None:
     base = env.get_template("base.html")
 
     public_entries = _render_public_entries()
-    deeper_entries = _render_deeper_entries()
     latest_entries = public_entries[-5:]
     readme_html = _md_to_html(README_PATH.read_text(encoding="utf-8"))
 
@@ -141,7 +124,6 @@ def build_site() -> None:
         title="Second Order Research",
         readme_html=readme_html,
         public_entries=latest_entries,
-        deeper_entries=deeper_entries,
         methodology_chart=methodology_chart,
     )
     (OUT_DIR / "index.html").write_text(home, encoding="utf-8")
@@ -151,7 +133,6 @@ def build_site() -> None:
         page="library",
         title="Research Library",
         public_entries=public_entries,
-        deeper_entries=deeper_entries,
     )
     (OUT_DIR / "library" / "index.html").write_text(lib_index, encoding="utf-8")
 
@@ -162,35 +143,14 @@ def build_site() -> None:
             title=entry["title"],
             body_html=entry["body_html"],
             public_entries=public_entries,
-            deeper_entries=deeper_entries,
         )
         (OUT_DIR / "library" / f"{entry['slug']}.html").write_text(page, encoding="utf-8")
-
-    # Deeper research index
-    deeper_index = base.render(
-        page="deeper-research",
-        title="Deeper Research",
-        deeper_entries=deeper_entries,
-        public_entries=public_entries,
-    )
-    (OUT_DIR / "deeper-research" / "index.html").write_text(deeper_index, encoding="utf-8")
-
-    for entry in deeper_entries:
-        page = base.render(
-            page="entry",
-            title=entry["title"],
-            body_html=entry["body_html"],
-            public_entries=public_entries,
-            deeper_entries=deeper_entries,
-        )
-        (OUT_DIR / "deeper-research" / f"{entry['slug']}.html").write_text(page, encoding="utf-8")
 
     # Latest research — full content of all reports
     latest_index = base.render(
         page="latest",
         title="Latest Research",
         public_entries=public_entries,
-        deeper_entries=deeper_entries,
     )
     (OUT_DIR / "latest" / "index.html").write_text(latest_index, encoding="utf-8")
 
@@ -200,7 +160,6 @@ def build_site() -> None:
         page="founders",
         title="Founders",
         public_entries=public_entries,
-        deeper_entries=deeper_entries,
     )
     (OUT_DIR / "founders" / "index.html").write_text(founders_page, encoding="utf-8")
 

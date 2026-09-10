@@ -13,8 +13,7 @@
       <a class="brand" href="./">Second Order Research</a>
       <nav class="site-nav" aria-label="Primary">
         <a href="./" class="{% if page == 'home' %}active{% endif %}">Home</a>
-        <a href="library/" class="{% if page == 'library' %}active{% endif %}">Library</a>
-        <a href="deeper-research/" class="{% if page == 'deeper-research' %}active{% endif %}">Deeper Research</a>
+        <a href="library/" class="{% if page == 'library' %}active{% endif %}">Research</a>
         <a href="latest/" class="{% if page == 'latest' %}active{% endif %}">Latest</a>
         <a href="founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
         <a href="raith/" class="{% if page == 'raith' %}active{% endif %}">Raith Rovers</a>
@@ -112,20 +111,6 @@
       </ul>
     {% endif %}
 
-    {% if page == 'deeper-research' %}
-      <section class="page-header">
-        <h1>Deeper Research</h1>
-        <p class="lead">Original technical research notes, pre-registered protocols, and full statistical output.</p>
-      </section>
-      <ul class="entry-list">
-        {% for entry in deeper_entries %}
-          <li>
-            <a href="deeper-research/{{ entry.slug }}.html">{{ entry.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
     {% if page == 'latest' %}
       <section class="page-header">
         <h1>Latest Research</h1>
@@ -217,8 +202,7 @@
           <div class="sidebar-card">
             <h3>Research</h3>
             <ul>
-              <li><a href="library/">Public library</a></li>
-              <li><a href="deeper-research/">Deeper research</a></li>
+              <li><a href="library/">Research</a></li>
               <li><a href="latest/">Latest</a></li>
             </ul>
           </div>
