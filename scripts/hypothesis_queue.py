@@ -338,7 +338,13 @@ def load_queue() -> list[Hypothesis]:
         save_queue(queue)
         return queue
     data = json.loads(QUEUE_PATH.read_text())
-    return [Hypothesis(**h) for h in data]
+    # Tolerate older queue files missing the 'negative' field
+    loaded = []
+    for h in data:
+        if "negative" not in h or not h.get("negative"):
+            h["negative"] = f"No effect: {h.get('title', 'hypothesis')} is not supported."
+        loaded.append(Hypothesis(**h))
+    return loaded
 
 
 def save_queue(queue: list[Hypothesis]) -> None:

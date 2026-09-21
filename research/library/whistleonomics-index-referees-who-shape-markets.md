@@ -1,5 +1,7 @@
 # The Whistleonomics Index: Referees Who Shape Markets
 
+**Published:** 2026-08-31
+
 **Some officials consistently hand out cards like confetti. Others let tackles slide. The card market barely notices.**
 
 ## Bottom Line Up Front

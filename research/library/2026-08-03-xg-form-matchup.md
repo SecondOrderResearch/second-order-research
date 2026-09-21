@@ -1,5 +1,7 @@
 # Research Library Entry
 
+**Published:** 2026-08-03
+
 **ID:** 2026-08-03-xg-form-matchup  
 **Title:** 3-game rolling xG/xGA form vs opponent outperformance matchup  
 **Status:** Rejected  

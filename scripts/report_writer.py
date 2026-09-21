@@ -27,10 +27,13 @@ def generate_technical_report(
     effect_size: Optional[float] = None,
     p_value: Optional[float] = None,
     sample_size: Optional[int] = None,
+    published: Optional[str] = None,
 ) -> str:
     """Generate a technical research library entry in markdown."""
     lines = [
         "# Research Library Entry",
+        "",
+        f"**Published:** {published or date.today().isoformat()}",
         "",
         f"**ID:** {hypothesis_id}  ",
         f"**Title:** {title}  ",
@@ -101,6 +104,7 @@ def generate_public_report(
     status: str,
     effect_size: Optional[float] = None,
     p_value: Optional[float] = None,
+    published: Optional[str] = None,
 ) -> str:
     """Generate a public-facing report in markdown."""
     # Build bottom line from results
@@ -117,6 +121,8 @@ def generate_public_report(
 
     lines = [
         f"# {title}",
+        "",
+        f"**Published:** {published or date.today().isoformat()}",
         "",
         f"*{hypothesis}*",
         "",

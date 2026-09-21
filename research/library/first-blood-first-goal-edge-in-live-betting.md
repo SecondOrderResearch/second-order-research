@@ -1,5 +1,7 @@
 # First Blood: The First-Goal Edge in Live Betting
 
+**Published:** 2026-08-31
+
 **Scoring first isn’t just psychological — it’s a measurable live-betting edge.**
 
 ## Bottom Line Up Front

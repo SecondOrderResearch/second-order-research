@@ -1,5 +1,7 @@
 # Miles Matter: How Travel Breaks Away Teams
 
+**Published:** 2026-08-31
+
 **Bookmakers adjust for jet lag. They don’t adjust for bus-ride grind.**
 
 ## Bottom Line Up Front

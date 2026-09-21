@@ -1,5 +1,7 @@
 # Windfall or Wind Break: How Weather Skews Totals
 
+**Published:** 2026-08-31
+
 **Bookmakers adjust for rain. They don’t adjust enough for wind.**
 
 ## Bottom Line Up Front

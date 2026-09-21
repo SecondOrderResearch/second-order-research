@@ -1,5 +1,7 @@
 # New Season, Same Mistakes: The Promoted-Team Tax
 
+**Published:** 2026-08-31
+
 **Bookmakers overprice newly promoted sides — and the market slowly learns each autumn.**
 
 ## Bottom Line Up Front

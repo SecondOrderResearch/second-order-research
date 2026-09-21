@@ -1,5 +1,7 @@
 # Research Library Entry
 
+**Published:** 2026-08-11
+
 **ID:** 2026-08-11-xg-delta-next-win
 **Title:** xG-difference over previous N games predicts next-game win (PL, Sofascore xG)
 **Status:** Supported

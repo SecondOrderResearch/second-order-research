@@ -1,5 +1,7 @@
 # The Rest Gap: When One Team Is Fresher
 
+**Published:** 2026-08-31
+
 **Three days’ rest isn’t just nice to have — it’s a measurable edge.**
 
 ## Bottom Line Up Front

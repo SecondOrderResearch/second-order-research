@@ -1,5 +1,7 @@
 # The September Slump: Relegation Shadow Bets
 
+**Published:** 2026-08-31
+
 **Teams that barely stayed up last season start the next campaign slowly — and the market forgets every summer.**
 
 ## Bottom Line Up Front

@@ -69,6 +69,7 @@
           {% for entry in public_entries %}
             <li>
               <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
+              {% if entry.published_display %}<span class="entry-meta">{{ entry.published_display }}</span>{% endif %}
             </li>
           {% endfor %}
         </ul>
@@ -97,8 +98,8 @@
             </p>
           </div>
           <div class="card">
-            <h3>Deeper research</h3>
-            <p>{{ deeper_entries|length }} technical notes with full statistical output.</p>
+            <h3>Published</h3>
+            <p>New research added weekly. Most recent: {{ public_entries[0].published_display if public_entries else '—' }}</p>
           </div>
         </div>
       </section>
@@ -106,6 +107,7 @@
         {% for entry in public_entries %}
           <li>
             <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
+            {% if entry.published_display %}<span class="entry-meta">{{ entry.published_display }}</span>{% endif %}
           </li>
         {% endfor %}
       </ul>
@@ -119,6 +121,7 @@
       {% for entry in public_entries %}
         <article class="latest-entry">
           <h2><a href="library/{{ entry.slug }}.html">{{ entry.title }}</a></h2>
+          {% if entry.published_display %}<p class="entry-meta published">{{ entry.published_display }}</p>{% endif %}
           {{ entry.body_html|safe }}
         </article>
       {% endfor %}

@@ -1,6 +1,8 @@
 # Big Pitches, Bigger Corner Counts
 
-**The corners market is where the sharp money has been quietly winning for years — and pitch size is one of the hidden levers.**
+**Published:** 2026-08-31
+
+*The corners market is where the sharp money has been quietly winning for years — and pitch size is one of the hidden levers.*
 
 ## Bottom Line Up Front
 - **Corner totals are underpriced on pitches larger than 105×68**

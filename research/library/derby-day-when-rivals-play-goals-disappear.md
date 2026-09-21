@@ -1,5 +1,7 @@
 # Derby Day: When Rivals Play, Goals Disappear
 
+**Published:** 2026-08-31
+
 **Local derbies are tighter, meaner, and lower scoring than the model expects.**
 
 ## Bottom Line Up Front

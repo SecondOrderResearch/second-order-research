@@ -1,5 +1,7 @@
 # Research Note — Sofascore as Secondary xG / Performance Source
 
+**Published:** 2026-08-11
+
 **Date:** 2026-08-11
 **Author:** Lead Research Analyst (Hermes)
 **Status:** Proven usable with documented calibration

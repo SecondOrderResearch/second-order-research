@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import re
 import shutil
+from datetime import datetime
 from pathlib import Path
 
 import markdown
@@ -74,18 +76,45 @@ def _entry_status(path: Path) -> str | None:
     return None
 
 
+def _entry_published(path: Path) -> str | None:
+    """Extract published date, prefer explicit **Published:** else filename YYYY-MM-DD."""
+    text = path.read_text(encoding="utf-8")
+    for line in text.splitlines():
+        if line.startswith("**Published:**"):
+            return line.split("**Published:**", 1)[1].strip().strip("*")
+    # Fall back to filename prefix
+    m = re.match(r"(\d{4}-\d{2}-\d{2})", path.stem)
+    return m.group(1) if m else None
+
+
+def _published_display(published: str | None) -> str:
+    """Format 2026-08-31 -> '31 Aug 2026'."""
+    if not published:
+        return ""
+    try:
+        d = datetime.strptime(published[:10], "%Y-%m-%d")
+        return d.strftime("%-d %b %Y")
+    except ValueError:
+        return published
+
+
 def _render_public_entries() -> list[dict]:
     entries: list[dict] = []
     for path in _collect_md_files(DEEPER_LIBRARY_DIR):
         html = _md_to_html(path.read_text(encoding="utf-8"), strip_top_heading=True)
+        published = _entry_published(path)
         entries.append(
             {
                 "slug": _entry_slug(path),
                 "title": _entry_title(path, path.stem),
                 "status": _entry_status(path) or "Unknown",
+                "published": published or "",
+                "published_display": _published_display(published),
                 "body_html": html,
             }
         )
+    # Sort newest-first by published date (undated last, keep alpha order)
+    entries.sort(key=lambda e: e["published"] or "0000-00-00", reverse=True)
     return entries
 
 
