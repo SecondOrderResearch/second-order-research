@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Order Research — Post-European Weekend Fatigue</title>
+  <base href="/second-order-research/">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="./">Second Order Research</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="./" class="">Home</a>
+        <a href="library/" class="">Research</a>
+        <a href="latest/" class="">Latest</a>
+        <a href="founders/" class="">Founders</a>
+        <a href="raith/" class="">Raith Rovers</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main">
+    
+
+    
+
+    
+
+    
+
+    
+      <div class="entry-body">
+        <article class="entry-main">
+          <h1>Post-European Weekend Fatigue</h1>
+          <p><strong>Published:</strong> 2026-09-21</p>
+<p><strong>ID:</strong> post-european-fatigue<br>
+<strong>Title:</strong> Post-European Weekend Fatigue<br>
+<strong>Status:</strong> Rejected<br>
+<strong>Pre-registered:</strong> Yes<br>
+<strong>Hypothesis:</strong> Teams playing in European competitions (UCL, UEL, UECL) produce worse results the following weekend compared to non-European teams.<br>
+<strong>Null hypothesis:</strong> European participation has no effect on weekend match outcomes.<br>
+<strong>Direction:</strong> Negative: European midweek → worse weekend performance (fewer points, more goals conceded).<br>
+<strong>Data source:</strong> football-data.co.uk (football_data table)<br>
+<strong>Sample:</strong> 2660 PL matches 2019/20–2025/26 (5320 team-match rows); European participants identified per season<br>
+<strong>Features:</strong> european_midweek, weekend_points, weekend_goals_conceded, weekend_goal_difference<br>
+<strong>Method:</strong> Welch's t-test + Cohen's d + 95% CI; compare European vs non-European teams on weekend outcomes.  </p>
+<p><strong>Sample size:</strong> 2660  </p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_treatment</th>
+<th>n_control</th>
+<th>mean_treatment</th>
+<th>mean_control</th>
+<th>mean_shift_pct</th>
+<th>cohens_d</th>
+<th>p_value</th>
+<th>ci_95_low</th>
+<th>ci_95_high</th>
+<th>significant_holm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1_euro_teams_in_vs_out_of_window_points</td>
+<td>1326</td>
+<td>764</td>
+<td>1.747</td>
+<td>1.708</td>
+<td>2.3</td>
+<td>0.03</td>
+<td>0.512</td>
+<td>-0.078</td>
+<td>0.157</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C2_euro_teams_in_vs_out_of_window_gd</td>
+<td>1326</td>
+<td>764</td>
+<td>0.542</td>
+<td>0.603</td>
+<td>-10.1</td>
+<td>-0.032</td>
+<td>0.4768</td>
+<td>-0.23</td>
+<td>0.107</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C3_placebo_non_euro_in_vs_out_of_window_points</td>
+<td>2068</td>
+<td>1162</td>
+<td>1.159</td>
+<td>1.147</td>
+<td>1.0</td>
+<td>0.009</td>
+<td>0.8061</td>
+<td>-0.08</td>
+<td>0.103</td>
+<td>False</td>
+</tr>
+<tr>
+<td>C4_euro_vs_non_euro_in_window_points</td>
+<td>1326</td>
+<td>2068</td>
+<td>1.747</td>
+<td>1.159</td>
+<td>50.8</td>
+<td>0.449</td>
+<td>0.0</td>
+<td>0.498</td>
+<td>0.68</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<p>Across 2660 PL matches, European teams' points during European windows do not differ significantly from outside them after correction. Midweek European football alone does not measurably dent league performance in this sample.</p>
+<h2>Conclusion</h2>
+<p>The post-European fatigue hypothesis is rejected for this dataset — squad rotation appears to absorb the congestion at this level.</p>
+<h2>Lessons</h2>
+<ul>
+<li>European qualification is proxied by a per-season registry, not fixture lists; deep UCL/UEL runs are not distinguished from early exits.</li>
+<li>The placebo contrast (non-European teams, same windows) is the key falsification device — without it, seasonal form drift masquerades as fatigue.</li>
+<li>Window boundaries (Sep 15 / Dec 15 / Feb 15) approximate the European calendar; a fixture-level join would sharpen the treatment definition.</li>
+</ul>
+        </article>
+        <aside class="entry-sidebar">
+          <div class="sidebar-card">
+            <h3>Research</h3>
+            <ul>
+              <li><a href="library/">Research</a></li>
+              <li><a href="latest/">Latest</a></li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="founders/">Founders</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Second Order Research. Internal — Proprietary Methodology.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -58,12 +58,12 @@
       "european_fixtures"
     ],
     "method": "Welch's t-test + Cohen's d + 95% CI; compare European vs non-European teams on weekend outcomes.",
-    "status": "untested",
-    "last_tested": null,
-    "result": null,
+    "status": "tested",
+    "last_tested": "2026-09-21",
+    "result": "Rejected",
     "effect_size": null,
     "p_value": null,
-    "sample_size": null,
+    "sample_size": 2660,
     "tags": [
       "scheduling",
       "europe",
