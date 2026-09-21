@@ -50,6 +50,11 @@ def _collect_md_files(directory: Path) -> list[Path]:
     return sorted(directory.glob("*.md"))
 
 
+def _is_public_entry(path: Path) -> bool:
+    """Technical supplements (-technical.md) are not standalone library entries."""
+    return not path.stem.endswith("-technical")
+
+
 def _entry_slug(path: Path) -> str:
     return path.stem
 
@@ -101,6 +106,8 @@ def _published_display(published: str | None) -> str:
 def _render_public_entries() -> list[dict]:
     entries: list[dict] = []
     for path in _collect_md_files(DEEPER_LIBRARY_DIR):
+        if not _is_public_entry(path):
+            continue
         html = _md_to_html(path.read_text(encoding="utf-8"), strip_top_heading=True)
         published = _entry_published(path)
         entries.append(

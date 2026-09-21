@@ -6,9 +6,8 @@
 
 ## Bottom Line Up Front
 
-- C1 Euro Teams In Vs Out Of Window Points: 2.3 shift (significant)
-- C2 Euro Teams In Vs Out Of Window Gd: -10.1 shift (significant)
-- C3 Placebo Non Euro In Vs Out Of Window Points: 1.0 shift (significant)
+- No contrasts reached statistical significance after correction
+- **No betting edge identified — do not trade this angle**
 
 **Direction:** Negative: European midweek → worse weekend performance (fewer points, more goals conceded).  
 **Status:** Rejected  
@@ -25,15 +24,11 @@ Across 2660 PL matches, European teams' points during European windows do not di
 
 ## Market Inefficiency
 
-The market does not fully price this effect, creating opportunities in the following markets:
+None. The pre-registered hypothesis was rejected after multiple-comparison correction — any apparent pattern in this data is indistinguishable from noise, and the market needs no adjustment for it.
 
 ## Betting Actions
 
-| Market | Trigger | Action |
-|---|---|---|
-| Match result | Condition met | Bet accordingly |
-| Total goals | Condition met | Bet accordingly |
-| Asian handicap | Condition met | Bet accordingly |
+No actions — there is no edge to trade on this finding.
 
 ## Confidence
 

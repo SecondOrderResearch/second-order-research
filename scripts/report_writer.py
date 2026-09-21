@@ -110,14 +110,16 @@ def generate_public_report(
     # Build bottom line from results
     bottom_lines = []
     for r in results[:3]:
-        if r.get('significant', '') == 'True' or r.get('significant', False):
-            shift = r.get('mean_shift_pct', '')
-            metric = r['name'].replace('_', ' ').title()
+        if str(r.get("significant", "")) == "True":
+            shift = r.get("mean_shift_pct", "")
+            metric = r["name"].replace("_", " ").title()
             if shift:
-                bottom_lines.append(f"- {metric}: {shift} shift (significant)")
+                bottom_lines.append(f"- {metric}: {shift}% shift (significant after correction)")
 
     if not bottom_lines:
-        bottom_lines.append("- No contrasts reached statistical significance")
+        bottom_lines.append("- No contrasts reached statistical significance after correction")
+        if status == "Rejected":
+            bottom_lines.append("- **No betting edge identified — do not trade this angle**")
 
     lines = [
         f"# {title}",
@@ -150,16 +152,32 @@ def generate_public_report(
         "",
         "## Market Inefficiency",
         "",
-        "The market does not fully price this effect, creating opportunities in the following markets:",
+    ])
+
+    if status == "Rejected":
+        lines.append(
+            "None. The pre-registered hypothesis was rejected after multiple-comparison "
+            "correction — any apparent pattern in this data is indistinguishable from noise, "
+            "and the market needs no adjustment for it."
+        )
+    else:
+        lines.append(
+            "The market does not fully price this effect, creating opportunities in the following markets:"
+        )
+
+    lines.extend([
         "",
         "## Betting Actions",
         "",
-        "| Market | Trigger | Action |",
-        "|---|---|---|",
     ])
 
-    for market in markets_affected:
-        lines.append(f"| {market} | Condition met | Bet accordingly |")
+    if status == "Rejected":
+        lines.append("No actions — there is no edge to trade on this finding.")
+    else:
+        lines.append("| Market | Trigger | Action |")
+        lines.append("|---|---|---|")
+        for market in markets_affected:
+            lines.append(f"| {market} | Condition met | Bet accordingly |")
 
     lines.extend([
         "",
