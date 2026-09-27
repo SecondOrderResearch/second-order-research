@@ -4,7 +4,7 @@
 
 **ID:** international-break-hangover  
 **Title:** International Break Hangover  
-**Status:** Supported  
+**Status:** NOT TESTED — SMOKE TEST ONLY (no dedicated hypothesis branch)  
 **Pre-registered:** Yes  
 **Hypothesis:** Teams with more players on international duty produce worse results in the first match after the break.  
 **Null hypothesis:** International break has no effect on post-break match outcomes.  
