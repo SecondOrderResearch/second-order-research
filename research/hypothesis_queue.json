@@ -93,12 +93,12 @@
       "international_break_dates"
     ],
     "method": "Correlation + median split; Welch's t-test on high vs low international count.",
-    "status": "untested",
-    "last_tested": null,
-    "result": null,
-    "effect_size": null,
-    "p_value": null,
-    "sample_size": null,
+    "status": "tested",
+    "last_tested": "2026-09-27",
+    "result": "Supported",
+    "effect_size": 0.334,
+    "p_value": 0.0,
+    "sample_size": 10000,
     "tags": [
       "scheduling",
       "internationals",
