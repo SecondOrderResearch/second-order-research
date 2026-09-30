@@ -72,41 +72,6 @@
     ]
   },
   {
-    "id": "international-break-hangover",
-    "category": "scheduling",
-    "title": "International Break Hangover",
-    "hypothesis": "Teams with more players on international duty produce worse results in the first match after the break.",
-    "negative": "International break has no effect on post-break match outcomes.",
-    "direction": "Negative: more internationals \u2192 worse post-break performance.",
-    "markets_affected": [
-      "Match result",
-      "Total goals",
-      "First half goals"
-    ],
-    "variables_tested": [
-      "international_players_count",
-      "post_break_points",
-      "post_break_goals"
-    ],
-    "data_requirements": [
-      "matches",
-      "international_break_dates"
-    ],
-    "method": "Correlation + median split; Welch's t-test on high vs low international count.",
-    "status": "tested",
-    "last_tested": "2026-09-27",
-    "result": "Supported",
-    "effect_size": 0.334,
-    "p_value": 0.0,
-    "sample_size": 10000,
-    "tags": [
-      "scheduling",
-      "internationals",
-      "fatigue",
-      "break"
-    ]
-  },
-  {
     "id": "new-manager-bounce",
     "category": "squad_dynamics",
     "title": "New Manager Bounce",

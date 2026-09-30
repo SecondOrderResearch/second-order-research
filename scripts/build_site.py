@@ -139,7 +139,7 @@ def build_site() -> None:
     base = env.get_template("base.html")
 
     public_entries = _render_public_entries()
-    latest_entries = public_entries[-5:]
+    latest_entries = public_entries[:5]
     readme_html = _md_to_html(README_PATH.read_text(encoding="utf-8"))
 
     methodology_chart = pipeline_diagram(
