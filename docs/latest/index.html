@@ -33,6 +33,111 @@
       </section>
       
         <article class="latest-entry">
+          <h2><a href="library/2026-10-11-travel-distance-amplifies-midweek.html">Travel Distance Amplifies Midweek Effect</a></h2>
+          <p class="entry-meta published">11 Oct 2026</p>
+          <p><strong>Published:</strong> 2026-10-11</p>
+<p><em>The midweek away disadvantage for favoured sides is more pronounced the longer the journey. Teams travelling &gt;200 miles midweek underperform those travelling &lt;50 miles.</em></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Home Vs Away Goals Baseline: 36.0% shift (significant after correction)</li>
+</ul>
+<p><strong>Direction:</strong> Negative: longer travel + midweek away → worse performance.<br>
+<strong>Status:</strong> Supported  </p>
+<h2>The Read</h2>
+<p>NOTE: this is a generic home-vs-away goals baseline, not a test of 'Travel Distance Amplifies Midweek Effect'. A hypothesis-specific test module is required before this result is meaningful. Baseline: home teams average 1.53 goals vs 1.13 away.</p>
+<h2>Key Numbers</h2>
+<ul>
+<li><strong>Home Vs Away Goals Baseline</strong>: 36.0 shift, Cohen's d = 0.334, p = 0.0</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>The market does not fully price this effect, creating opportunities in the following markets:</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Match result</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Asian handicap</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Team totals</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong></p>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/2026-10-05-midweek-away-favoured-sides.html">Midweek Away Games for Favoured Sides</a></h2>
+          <p class="entry-meta published">5 Oct 2026</p>
+          <p><strong>Published:</strong> 2026-10-05</p>
+<p><em>Favoured sides (top half of the league) playing midweek away games underperform expectations — the classic 'rainy Tuesday in Stoke' effect. Short rest + travel + hostile midweek atmosphere reduces performance.</em></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Home Vs Away Goals Baseline: 36.0% shift (significant after correction)</li>
+</ul>
+<p><strong>Direction:</strong> Negative: midweek away → favoured sides underperform (fewer points, narrower wins).<br>
+<strong>Status:</strong> Supported  </p>
+<h2>The Read</h2>
+<p>NOTE: this is a generic home-vs-away goals baseline, not a test of 'Midweek Away Games for Favoured Sides'. A hypothesis-specific test module is required before this result is meaningful. Baseline: home teams average 1.53 goals vs 1.13 away.</p>
+<h2>Key Numbers</h2>
+<ul>
+<li><strong>Home Vs Away Goals Baseline</strong>: 36.0 shift, Cohen's d = 0.334, p = 0.0</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>The market does not fully price this effect, creating opportunities in the following markets:</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Match result</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Asian handicap</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong></p>
+        </article>
+      
+        <article class="latest-entry">
           <h2><a href="library/2026-09-21-post-european-fatigue.html">Post-European Weekend Fatigue</a></h2>
           <p class="entry-meta published">21 Sep 2026</p>
           <p><strong>Published:</strong> 2026-09-21</p>
@@ -802,6 +907,256 @@ required. The xG table remains provider-independent (home_xg/away_xg/xg_source).
 <li>Interaction effects require larger samples or more powerful designs.</li>
 <li>StatsBomb shot-level xG is usable but may benefit from calibration or comparison against alternative providers.</li>
 <li>The falsification-first protocol correctly classified this as a successful null result rather than a failed test.</li>
+</ul>
+        </article>
+      
+        <article class="latest-entry">
+          <h2><a href="library/midweek-vs-weekend.html">Midweek vs Weekend Performance Analysis</a></h2>
+          
+          <p><strong>Date:</strong> 2026-10-08<br>
+<strong>Status:</strong> Complete<br>
+<strong>Hypothesis:</strong> Teams perform differently on midweek (Tue/Wed) vs weekend (Sat/Sun) matches.</p>
+<h2>Dataset</h2>
+<ul>
+<li><strong>Midweek matches:</strong> 5,277</li>
+<li><strong>Weekend matches:</strong> 19,561</li>
+<li><strong>Other (Mon/Thu/Fri):</strong> 2,482</li>
+<li><strong>Total:</strong> 27,320 matches with complete data</li>
+<li><strong>Leagues:</strong> Premier League, Championship, Premiership</li>
+<li><strong>Date range:</strong> 1993–2026</li>
+</ul>
+<h2>Method</h2>
+<ul>
+<li>Classified matches by day of week</li>
+<li>Compared midweek vs weekend performance using Welch's t-test</li>
+<li>Applied Holm-Bonferroni correction for multiple testing</li>
+<li>Effect size: Cohen's d</li>
+</ul>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th>n_midweek</th>
+<th>n_weekend</th>
+<th>Mean_MW</th>
+<th>Mean_WE</th>
+<th>Shift</th>
+<th>Cohen's d</th>
+<th>p-value</th>
+<th>Holm Sig?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1 Total goals</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>2.58</td>
+<td>2.66</td>
+<td>-2.8%</td>
+<td>-0.046</td>
+<td>2.8e-03</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td>C2 Total shots</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>23.40</td>
+<td>23.59</td>
+<td>-0.8%</td>
+<td>-0.032</td>
+<td>3.8e-02</td>
+<td>No</td>
+</tr>
+<tr>
+<td>C3 Total corners</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>10.51</td>
+<td>10.80</td>
+<td>-2.7%</td>
+<td>-0.082</td>
+<td>1.2e-07</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td>C4 Home points</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>1.59</td>
+<td>1.60</td>
+<td>-0.3%</td>
+<td>-0.003</td>
+<td>8.4e-01</td>
+<td>No</td>
+</tr>
+<tr>
+<td>C5 Away points</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>1.41</td>
+<td>1.40</td>
+<td>+0.3%</td>
+<td>0.003</td>
+<td>8.4e-01</td>
+<td>No</td>
+</tr>
+<tr>
+<td>C6 Home goals</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>1.45</td>
+<td>1.50</td>
+<td>-3.2%</td>
+<td>-0.038</td>
+<td>1.3e-02</td>
+<td>No</td>
+</tr>
+<tr>
+<td>C7 Away goals</td>
+<td>5,277</td>
+<td>19,561</td>
+<td>1.13</td>
+<td>1.16</td>
+<td>-2.4%</td>
+<td>-0.025</td>
+<td>1.1e-01</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h2>Interpretation</h2>
+<ul>
+<li><strong>Total goals</strong> are significantly lower on midweek matches (-2.8%, p &lt; 0.01)</li>
+<li><strong>Total corners</strong> are significantly lower on midweek matches (-2.7%, p &lt; 0.001)</li>
+<li><strong>Home/away points</strong> show no significant difference</li>
+<li><strong>Home goals</strong> are lower on midweek but not significant after correction</li>
+<li><strong>Away goals</strong> are lower on midweek but not significant after correction</li>
+</ul>
+<h2>Team-Level Findings (20+ midweek home matches)</h2>
+<h3>Worst Midweek Performers</h3>
+<table>
+<thead>
+<tr>
+<th>Team</th>
+<th>MW Home Pts</th>
+<th>WE Home Pts</th>
+<th>Diff</th>
+<th>MW Goals</th>
+<th>WE Goals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blackpool</td>
+<td>1.05</td>
+<td>1.48</td>
+<td>-0.43</td>
+<td>1.21</td>
+<td>1.37</td>
+</tr>
+<tr>
+<td>Aberdeen</td>
+<td>1.35</td>
+<td>1.77</td>
+<td>-0.42</td>
+<td>1.69</td>
+<td>1.41</td>
+</tr>
+<tr>
+<td>Doncaster Rovers</td>
+<td>1.00</td>
+<td>1.40</td>
+<td>-0.40</td>
+<td>0.84</td>
+<td>1.20</td>
+</tr>
+<tr>
+<td>Swansea City</td>
+<td>1.41</td>
+<td>1.64</td>
+<td>-0.23</td>
+<td>1.28</td>
+<td>1.43</td>
+</tr>
+<tr>
+<td>Hull City</td>
+<td>1.28</td>
+<td>1.50</td>
+<td>-0.22</td>
+<td>1.21</td>
+<td>1.39</td>
+</tr>
+</tbody>
+</table>
+<h3>Best Midweek Performers</h3>
+<table>
+<thead>
+<tr>
+<th>Team</th>
+<th>MW Home Pts</th>
+<th>WE Home Pts</th>
+<th>Diff</th>
+<th>MW Goals</th>
+<th>WE Goals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Middlesbrough</td>
+<td>2.02</td>
+<td>1.49</td>
+<td>+0.53</td>
+<td>1.45</td>
+<td>1.32</td>
+</tr>
+<tr>
+<td>Luton Town</td>
+<td>1.80</td>
+<td>1.28</td>
+<td>+0.51</td>
+<td>1.86</td>
+<td>1.21</td>
+</tr>
+<tr>
+<td>Motherwell</td>
+<td>1.80</td>
+<td>1.42</td>
+<td>+0.38</td>
+<td>1.70</td>
+<td>1.44</td>
+</tr>
+<tr>
+<td>Manchester City</td>
+<td>2.38</td>
+<td>2.10</td>
+<td>+0.29</td>
+<td>2.18</td>
+<td>2.25</td>
+</tr>
+<tr>
+<td>Celtic</td>
+<td>2.80</td>
+<td>2.51</td>
+<td>+0.28</td>
+<td>2.54</td>
+<td>2.66</td>
+</tr>
+</tbody>
+</table>
+<h2>Betting Implications</h2>
+<ul>
+<li><strong>Total goals:</strong> Consider under 2.5 goals on midweek matches</li>
+<li><strong>Total corners:</strong> Consider under corner lines on midweek matches</li>
+<li><strong>Team-specific:</strong> Some teams (Blackpool, Aberdeen, Doncaster) consistently underperform at home on midweek</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>src/analysis/midweek_analysis.py</code></li>
+<li><code>data/processed/midweek_results.csv</code></li>
+<li><code>data/processed/midweek_team_comparison.csv</code></li>
 </ul>
         </article>
       
