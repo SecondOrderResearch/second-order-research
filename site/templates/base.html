@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if title %}Second Order Research — {{ title }}{% else %}Second Order Research{% endif %}</title>
   <base href="/second-order-research/">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="/second-order-research/assets/styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="./">Second Order Research</a>
+      <a class="brand" href="/second-order-research/">Second Order Research</a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="./" class="{% if page == 'home' %}active{% endif %}">Home</a>
-        <a href="library/" class="{% if page == 'library' %}active{% endif %}">Research</a>
-        <a href="latest/" class="{% if page == 'latest' %}active{% endif %}">Latest</a>
-        <a href="founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
-        <a href="raith/" class="{% if page == 'raith' %}active{% endif %}">Raith Rovers</a>
+        <a href="/second-order-research/" class="{% if page == 'home' %}active{% endif %}">Home</a>
+        <a href="/second-order-research/library/" class="{% if page == 'library' %}active{% endif %}">Research</a>
+        <a href="/second-order-research/latest/" class="{% if page == 'latest' %}active{% endif %}">Latest</a>
+        <a href="/second-order-research/founders/" class="{% if page == 'founders' %}active{% endif %}">Founders</a>
+        <a href="/second-order-research/raith/" class="{% if page == 'raith' %}active{% endif %}">Raith Rovers</a>
       </nav>
     </div>
   </header>
@@ -31,7 +31,7 @@
           edges in football betting markets.
         </p>
         <p>
-          <a class="btn" href="library/">View research library</a>
+          <a class="btn" href="/second-order-research/library/">View research library</a>
         </p>
       </section>
 
@@ -68,7 +68,7 @@
         <ul class="entry-list">
           {% for entry in public_entries %}
             <li>
-              <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
+              <a href="/second-order-research/library/{{ entry.slug }}.html">{{ entry.title }}</a>
               {% if entry.published_display %}<span class="entry-meta">{{ entry.published_display }}</span>{% endif %}
             </li>
           {% endfor %}
@@ -106,7 +106,7 @@
       <ul class="entry-list">
         {% for entry in public_entries %}
           <li>
-            <a href="library/{{ entry.slug }}.html">{{ entry.title }}</a>
+            <a href="/second-order-research/library/{{ entry.slug }}.html">{{ entry.title }}</a>
             {% if entry.published_display %}<span class="entry-meta">{{ entry.published_display }}</span>{% endif %}
           </li>
         {% endfor %}
@@ -120,7 +120,7 @@
       </section>
       {% for entry in public_entries %}
         <article class="latest-entry">
-          <h2><a href="library/{{ entry.slug }}.html">{{ entry.title }}</a></h2>
+          <h2><a href="/second-order-research/library/{{ entry.slug }}.html">{{ entry.title }}</a></h2>
           {% if entry.published_display %}<p class="entry-meta published">{{ entry.published_display }}</p>{% endif %}
           {{ entry.body_html|safe }}
         </article>
@@ -205,14 +205,14 @@
           <div class="sidebar-card">
             <h3>Research</h3>
             <ul>
-              <li><a href="library/">Research</a></li>
-              <li><a href="latest/">Latest</a></li>
+              <li><a href="/second-order-research/library/">Research</a></li>
+              <li><a href="/second-order-research/latest/">Latest</a></li>
             </ul>
           </div>
           <div class="sidebar-card">
             <h3>Company</h3>
             <ul>
-              <li><a href="founders/">Founders</a></li>
+              <li><a href="/second-order-research/founders/">Founders</a></li>
             </ul>
           </div>
         </aside>
