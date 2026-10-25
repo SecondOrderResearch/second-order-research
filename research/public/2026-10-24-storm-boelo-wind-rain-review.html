@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Storm Boelo — Wind &amp; Rain Second-Order Review · 24 Oct 2026</title>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--ink:#e8eaf0;--dim:#9aa3b2;--line:#252a35;
+        --hot:#ff6b5e;--warm:#ffb454;--cool:#5ec8ff;--good:#4ade80;--bad:#f87171}
+  *{box-sizing:border-box}
+  body{margin:0;padding:32px 28px 60px;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;max-width:1180px}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.4px}
+  .sub{color:var(--dim);font-size:13.5px;margin-bottom:26px}
+  h2{font-size:17px;margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+  h3{font-size:14px;margin:22px 0 8px;color:var(--cool);text-transform:uppercase;letter-spacing:.7px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 6px}
+  th{text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);color:var(--dim);
+     font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+  td{padding:7px 9px;border-bottom:1px solid #1c2029;vertical-align:top}
+  tr:hover td{background:#1b1f28}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .verdict{border-left:3px solid var(--bad)}
+  .warn{border-left:3px solid var(--warm)}
+  .ok{border-left:3px solid var(--good)}
+  .pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;
+        letter-spacing:.3px;text-transform:uppercase}
+  .p-red{background:#3a1a18;color:var(--hot)}
+  .p-amb{background:#3a2c14;color:var(--warm)}
+  .p-grn{background:#14301f;color:var(--good)}
+  .p-blu{background:#12293a;color:var(--cool)}
+  code{background:#1e232d;padding:1.5px 5px;border-radius:4px;font-size:12.5px;color:#c9d4e5}
+  .muted{color:var(--dim)}
+  .big{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+  ul{margin:8px 0;padding-left:20px}
+  li{margin:5px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+  .stat .lab{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+  .stat .val{font-size:20px;font-weight:700;margin-top:3px}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+</style>
+</head>
+<body>
+
+<h1>Storm Boelo — Wind &amp; Rain Second-Order Review</h1>
+<div class="sub">Saturday 24 October 2026 · Second Order Research · Met Office yellow warning: gusts 55–65&nbsp;mph widely, 70–80&nbsp;mph exposed coasts, strongest across Scotland and the far north of England</div>
+
+<div class="card verdict">
+<h3 style="margin-top:0;color:var(--hot)">Headline: the library's wind claim does not replicate</h3>
+<p style="margin:6px 0"><code>research/library/windfall-or-wind-break-weather-skews-totals.md</code> claims <em>"Strong wind (&gt;20 kph) reduces total goals by ~10%"</em> and <em>"goals drop by ~0.3 per match"</em>, with action <em>"fade overs at exposed grounds when wind exceeds 20 kph"</em>.</p>
+<p style="margin:6px 0">Tested against every match we can actually join to venue-level weather (<strong>n = 241</strong>, Premier League 2003-08-24 → 2016-05-15), the effect is <strong>less than half the claimed size and not significant</strong>:</p>
+<div class="grid">
+  <div class="stat"><div class="lab">Claimed drop</div><div class="val">−0.30 goals</div></div>
+  <div class="stat"><div class="lab">Observed drop</div><div class="val" style="color:var(--warm)">−0.163 goals</div></div>
+  <div class="stat"><div class="lab">As % change</div><div class="val" style="color:var(--warm)">−5.8%</div></div>
+  <div class="stat"><div class="lab">p-value</div><div class="val" style="color:var(--bad)">0.46</div></div>
+</div>
+<p class="muted" style="margin:6px 0">95% CI on the difference: [−0.596, +0.271] — straddles zero comfortably. The claim as written is not supported.</p>
+</div>
+
+<h2>1 · What the research actually says</h2>
+
+<h3>Every library claim, tested</h3>
+<table>
+<tr><th>Claim in library</th><th>Test</th><th class="num">Result</th><th>Status</th></tr>
+<tr><td>Wind &gt;20 kph cuts goals ~10%</td><td>t-test, 92 calm vs 149 windy</td><td class="num">−5.8%, p=0.46</td><td><span class="pill p-red">Fails</span></td></tr>
+<tr><td>Goals drop ~0.3/match</td><td>mean difference</td><td class="num">−0.163</td><td><span class="pill p-red">Fails</span></td></tr>
+<tr><td>Wind + rain: −0.5 goals</td><td>wet-windy vs dry-calm</td><td class="num">−0.379, p=0.20</td><td><span class="pill p-red">Fails</span></td></tr>
+<tr><td>Coastal grounds hit hardest</td><td>coastal vs inland split</td><td class="num">+0.15 vs −0.22, p=0.82</td><td><span class="pill p-red">Fails</span></td></tr>
+<tr><td>First-half scoring most affected</td><td>FH goals vs wind</td><td class="num">r=+0.05, p=0.46</td><td><span class="pill p-red">Fails</span></td></tr>
+<tr><td>Corners: back the end with the wind</td><td>needs wind <em>bearing</em></td><td class="num">no direction data</td><td><span class="pill p-blu">Untestable</span></td></tr>
+</table>
+
+<h3>What <em>does</em> survive</h3>
+<div class="card warn">
+<p style="margin:6px 0">Isolating the cell that actually resembles today — <strong>wind &gt;35 kph AND rain &gt;2 mm</strong> (n=29) — the signal is <em>not</em> in goals. It is in discipline and in the second half:</p>
+<table>
+<tr><th>Metric</th><th class="num">Extreme cell</th><th class="num">Rest</th><th class="num">Shift</th><th class="num">p</th></tr>
+<tr><td>Total fouls</td><td class="num">19.86</td><td class="num">22.04</td><td class="num" style="color:var(--cool)">−9.9%</td><td class="num">0.030</td></tr>
+<tr><td>Total cards</td><td class="num">2.52</td><td class="num">3.29</td><td class="num" style="color:var(--cool)">−23.4%</td><td class="num">0.019</td></tr>
+<tr><td>Second-half goals</td><td class="num">1.17</td><td class="num">1.57</td><td class="num" style="color:var(--cool)">−25.4%</td><td class="num">0.038</td></tr>
+<tr><td>Total goals</td><td class="num">2.31</td><td class="num">2.75</td><td class="num">−15.8%</td><td class="num">0.096</td></tr>
+<tr><td>Total corners</td><td class="num">10.90</td><td class="num">11.03</td><td class="num">−1.2%</td><td class="num">0.878</td></tr>
+</table>
+<p class="muted" style="margin:8px 0 0"><strong>Read this cautiously.</strong> Seven metrics were tested on a 29-match cell; Bonferroni-corrected threshold is p&lt;0.007, and nothing clears it. This is a <em>lead</em>, not a finding. It is also the only physically coherent story in the data: a scrappy, broken-up game where players commit fewer reckless challenges.</p>
+</div>
+
+<h3>Two further tests, both negative</h3>
+<div class="card">
+<p style="margin:6px 0"><strong>The direction claim, tested without bearing data.</strong> We hold no pitch orientation or wind bearing, so a direct test is impossible. But the mechanism predicts something testable: if wind genuinely creates directional asymmetry, the <em>variance</em> of <code>home_corners − away_corners</code> must rise with wind, because wind direction relative to pitch varies randomly across fixtures. It does not.</p>
+<table>
+<tr><th>Test</th><th class="num">Statistic</th><th class="num">p</th></tr>
+<tr><td>corr(wind, |home−away corners|)</td><td class="num">+0.004</td><td class="num">0.956</td></tr>
+<tr><td>SD corner diff — calm / moderate / strong</td><td class="num">4.56 / 4.54 / 5.02</td><td class="num">—</td></tr>
+<tr><td>Levene (variance equality), calm vs strong</td><td class="num">W=0.387</td><td class="num">0.535</td></tr>
+</table>
+<p class="muted" style="margin:6px 0">No inflation in mean, none in spread. "Back the end with the wind" is not detectable in this data.</p>
+</div>
+
+<div class="card">
+<p style="margin:6px 0"><strong>The home-advantage channel.</strong> The most mechanistically plausible route — wind disrupting the home side's familiar routines and short passing — also fails to show a clean signal on results, though it shows a monotonic one on shots:</p>
+<table>
+<tr><th>Band</th><th class="num">n</th><th class="num">Home pts</th><th class="num">Home win%</th><th class="num">Shot adv</th><th class="num">Corner adv</th></tr>
+<tr><td>Calm ≤20</td><td class="num">92</td><td class="num">1.42</td><td class="num">39.1%</td><td class="num">+3.17</td><td class="num">+0.59</td></tr>
+<tr><td>Moderate 20–30</td><td class="num">84</td><td class="num">1.20</td><td class="num">31.0%</td><td class="num">+2.80</td><td class="num">+1.61</td></tr>
+<tr><td>Strong &gt;30</td><td class="num">65</td><td class="num">1.63</td><td class="num">44.6%</td><td class="num">+2.26</td><td class="num">+0.68</td></tr>
+</table>
+<p class="muted" style="margin:6px 0">Shot advantage declines monotonically (+3.17 → +2.26) — consistent with a levelling effect — but the trend is not significant (r=−0.040, p=0.53) and <strong>home win rate moves the wrong way</strong> (highest in strong wind, non-monotonic). Do not build on this.</p>
+</div>
+
+<h3>Why this is genuinely hard to settle</h3>
+<div class="grid">
+  <div class="stat"><div class="lab">Power at n=241</div><div class="val" style="color:var(--bad)">~28%</div></div>
+  <div class="stat"><div class="lab">Sample wind p90</div><div class="val">38.8 kph</div></div>
+  <div class="stat"><div class="lab">Matches &gt;45 kph</div><div class="val" style="color:var(--warm)">5</div></div>
+  <div class="stat"><div class="lab">Scottish matches</div><div class="val" style="color:var(--bad)">0</div></div>
+</div>
+<ul>
+<li><strong>No gust data.</strong> Legacy files carry <code>wind_speed_10m_max</code> only. Today is a <em>gust</em> event (55–79 kph), which the sample never measured.</li>
+<li><strong>No direction.</strong> The one mechanism that would be tradeable — tailwind helping one end — needs hourly bearing, which the sample lacks.</li>
+<li><strong>No Scottish football.</strong> The entire sample is English Premier League. Today's worst-affected fixtures are in Scotland.</li>
+<li><strong>Only 17 of 241 matches</strong> exceed 40 kph. Today is beyond the 90th percentile of the data we hold — we are extrapolating, not interpolating.</li>
+</ul>
+<p class="muted">A proper test needs the Open-Meteo archive backfilled with <code>wind_gusts_10m_max</code> <em>and</em> hourly direction per stadium across the full match history. That is the next build, not something I can responsibly claim today.</p>
+
+<h2>2 · Today's venues — actual forecast at kick-off</h2>
+<p class="muted" style="margin-top:0">Sustained wind (kph) · gusts (kph) · rain in the 3 hours from kick-off (mm). Source: Open-Meteo, venue coordinates.</p>
+<table>
+<tr><th>Match</th><th>KO</th><th class="num">Wind</th><th class="num">Gust</th><th class="num">Rain 3h</th><th>Exposure</th></tr>
+<tr><td><strong>Montrose v Peterhead</strong></td><td>15:00</td><td class="num">43.2</td><td class="num" style="color:var(--hot)">79.2</td><td class="num">7.5</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Falkirk v Kilmarnock</strong></td><td>15:00</td><td class="num">38.9</td><td class="num" style="color:var(--hot)">76.0</td><td class="num">9.4</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Blackburn v Wrexham</strong></td><td>15:00</td><td class="num">40.3</td><td class="num" style="color:var(--hot)">78.8</td><td class="num">2.8</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Morecambe v Newport</strong></td><td>15:00</td><td class="num">41.0</td><td class="num" style="color:var(--hot)">76.3</td><td class="num">2.1</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Barrow v Forest Green</strong></td><td>15:00</td><td class="num">39.2</td><td class="num" style="color:var(--hot)">74.5</td><td class="num">2.9</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Greenock Morton v Ayr</strong></td><td>15:00</td><td class="num">35.6</td><td class="num">59.4</td><td class="num" style="color:var(--cool)">8.6</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Blackpool v Mansfield</strong></td><td>15:00</td><td class="num">35.3</td><td class="num">64.1</td><td class="num">2.6</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Carlisle v Solihull</strong></td><td>15:00</td><td class="num">35.6</td><td class="num">70.6</td><td class="num">0.5</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>St Mirren v Dundee</strong></td><td>15:00</td><td class="num">33.1</td><td class="num">65.5</td><td class="num" style="color:var(--cool)">9.9</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Rangers v St Johnstone</strong></td><td>15:00</td><td class="num">32.0</td><td class="num">64.8</td><td class="num" style="color:var(--cool)">12.7</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Shrewsbury v Rotherham</strong></td><td>15:00</td><td class="num">33.5</td><td class="num">63.4</td><td class="num">2.0</td><td><span class="pill p-red">Extreme</span></td></tr>
+<tr><td><strong>Wolves v Watford</strong></td><td>15:00</td><td class="num">32.0</td><td class="num">63.7</td><td class="num">0.8</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Preston v West Brom</strong></td><td>15:00</td><td class="num">32.0</td><td class="num">63.4</td><td class="num">2.9</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Scunthorpe v Woking</strong></td><td>15:00</td><td class="num">32.8</td><td class="num">58.7</td><td class="num">0.3</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Stoke v Bristol City</strong></td><td>15:00</td><td class="num">29.5</td><td class="num">58.7</td><td class="num">1.0</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Dundee Utd v Aberdeen</strong></td><td>15:00</td><td class="num">29.9</td><td class="num">60.8</td><td class="num">5.2</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Raith Rovers v Inverness</strong></td><td>15:00</td><td class="num">29.2</td><td class="num">54.4</td><td class="num">3.1</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Coventry v Fulham</strong></td><td>15:00</td><td class="num">29.9</td><td class="num">57.2</td><td class="num">1.1</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Hartlepool v Hornchurch</strong></td><td>15:00</td><td class="num">28.1</td><td class="num">55.1</td><td class="num">0.2</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Port Vale v York</strong></td><td>15:00</td><td class="num">28.8</td><td class="num">58.0</td><td class="num">1.0</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Grimsby v Gillingham</strong></td><td>15:00</td><td class="num">27.0</td><td class="num">52.6</td><td class="num">0.6</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>Lincoln v Burnley</strong></td><td>15:00</td><td class="num">26.6</td><td class="num">51.8</td><td class="num">0.4</td><td><span class="pill p-amb">Moderate</span></td></tr>
+<tr><td><strong>Cardiff v Birmingham</strong></td><td>15:00</td><td class="num">26.6</td><td class="num">54.0</td><td class="num">4.5</td><td><span class="pill p-amb">Moderate</span></td></tr>
+<tr><td><strong>Chelsea v Tottenham</strong></td><td>17:30</td><td class="num">27.0</td><td class="num">57.2</td><td class="num">2.7</td><td><span class="pill p-amb">High</span></td></tr>
+<tr><td><strong>QPR v Swansea</strong></td><td>15:00</td><td class="num">20.9</td><td class="num">43.9</td><td class="num">1.1</td><td><span class="pill p-grn">Low</span></td></tr>
+<tr><td><strong>Aston Villa v Man City</strong></td><td>12:30</td><td class="num">21.2</td><td class="num">44.3</td><td class="num">0.6</td><td><span class="pill p-grn">Low</span></td></tr>
+<tr><td><strong>Arsenal v Everton</strong></td><td>15:00</td><td class="num">19.1</td><td class="num">41.0</td><td class="num">1.5</td><td><span class="pill p-grn">Low</span></td></tr>
+<tr><td><strong>West Ham v Southampton</strong></td><td>15:00</td><td class="num">17.3</td><td class="num">37.4</td><td class="num">1.9</td><td><span class="pill p-grn">Low</span></td></tr>
+<tr><td><strong>Ross County v Airdrieonians</strong></td><td>15:00</td><td class="num">10.1</td><td class="num">20.5</td><td class="num">3.8</td><td><span class="pill p-grn">Low</span></td></tr>
+</table>
+
+<h2>3 · Where the market may be slow — and where it isn't</h2>
+
+<div class="card warn">
+<p style="margin:0 0 8px"><strong>The honest framing.</strong> I cannot give you a statistically validated edge on totals today, because the underlying claim doesn't replicate. What I <em>can</em> do is flag markets where the price looks like it was set without regard to a 79 kph gust forecast, and be explicit that this is reasoning from mechanism plus a weak signal, not from a proven model.</p>
+</div>
+
+<h3>Markets that look least wind-aware</h3>
+<table>
+<tr><th>Fixture</th><th>Market</th><th class="num">Price</th><th>Why it looks stale</th><th>Conviction</th></tr>
+<tr>
+  <td><strong>Rangers v St Johnstone</strong><br><span class="muted">12.7 mm rain, 65 kph gusts</span></td>
+  <td>Over 2.5 goals</td><td class="num">−129 / 1.78</td>
+  <td>Priced as a near coin-flip on a day with the heaviest rain in the UK and 65 kph gusts at Ibrox. The extreme-cell analogue points −16% on goals and −25% on second-half goals. Under 2.5 at −122 is the side the weather supports.</td>
+  <td><span class="pill p-amb">Moderate</span></td>
+</tr>
+<tr>
+  <td><strong>Dundee Utd v Aberdeen</strong><br><span class="muted">5.2 mm, 61 kph gusts</span></td>
+  <td>Over 2.5 / BTTS Yes</td><td class="num">−147 / −185</td>
+  <td>Both aggressively juiced toward goals — Over 2.5 at −147 and BTTS Yes at −185 — on a wet, gusty Tannadice afternoon. This is the single clearest case of a goals-hedged market meeting a weather forecast that argues the other way.</td>
+  <td><span class="pill p-amb">Moderate</span></td>
+</tr>
+<tr>
+  <td><strong>Chelsea v Tottenham</strong><br><span class="muted">2.7 mm, 57 kph gusts, 17:30</span></td>
+  <td>Over 2.5 goals</td><td class="num">−200 / 1.50</td>
+  <td>Over 2.5 at −200 (67% implied) is a strong goals view. Evening kick-off catches the tail of the storm with 57 kph gusts. The strongest over-price on the card relative to conditions.</td>
+  <td><span class="pill p-amb">Moderate</span></td>
+</tr>
+<tr>
+  <td><strong>Falkirk v Kilmarnock</strong><br><span class="muted">9.4 mm, 76 kph gusts</span></td>
+  <td>Cards / fouls unders</td><td class="num">—</td>
+  <td>The one signal that survives at conventional significance: fouls −10%, cards −24% in extreme wind+rain. Falkirk is the windiest Scottish venue with meaningful rain. Needs a book offering cards lines — check before assuming value.</td>
+  <td><span class="pill p-amb">Speculative</span></td>
+</tr>
+<tr>
+  <td><strong>Montrose v Peterhead</strong><br><span class="muted">79 kph gusts — windiest on card</span></td>
+  <td>Goals under</td><td class="num">—</td>
+  <td>Links Park is the most exposed ground in the UK today. Lower-league prices are typically the last to move on weather. Hard to source liquidity, but this is where a weather edge would be largest.</td>
+  <td><span class="pill p-amb">Speculative</span></td>
+</tr>
+</table>
+
+<h3>Markets that are correctly priced — leave alone</h3>
+<ul>
+<li><strong>Arsenal v Everton</strong> (41 kph gusts, 1.5 mm) — genuinely mild by today's standards. Over 2.5 at −111 / Under at −114 is a fair coin-flip. No weather edge here; don't manufacture one.</li>
+<li><strong>Aston Villa v Man City</strong> (44 kph, 0.6 mm) — the Midlands escaped the worst. Nothing to see.</li>
+<li><strong>West Ham v Southampton</strong> (37 kph, 1.9 mm) — London sheltered. Skip.</li>
+<li><strong>Ross County v Airdrieonians</strong> (20.5 kph gusts) — the Highland microclimate has left Dingwall calm despite the warning. Interesting counter-example to "north = windy".</li>
+</ul>
+
+<h2>4 · Capturing today as out-of-sample data</h2>
+<p style="margin-top:0">Today is the strongest wind event since this research began, so it is worth recording properly rather than letting it pass. A capture harness now logs every fixture with its kick-off-hour weather <em>before</em> results land, then fills in scores and match stats afterwards.</p>
+
+<div class="grid">
+  <div class="stat"><div class="lab">Fixtures logged</div><div class="val">90</div></div>
+  <div class="stat"><div class="lab">Missing weather</div><div class="val" style="color:var(--good)">0</div></div>
+  <div class="stat"><div class="lab">Strongest gust</div><div class="val" style="color:var(--hot)">91.1 kph</div></div>
+  <div class="stat"><div class="lab">Heaviest rain</div><div class="val" style="color:var(--cool)">16.6 mm</div></div>
+</div>
+
+<p><code>scripts/capture_wind_events.py</code> writes to <code>data/processed/wind_event_log.csv</code>, keyed on <code>(match_date, home, away)</code> so re-runs update in place rather than duplicating. Three modes:</p>
+<table>
+<tr><th>Command</th><th>When</th><th>What it does</th></tr>
+<tr><td><code>--date YYYY-MM-DD</code></td><td>Before kick-off</td><td>Logs fixtures with wind, gust, bearing and 3h rain at the kick-off hour</td></tr>
+<tr><td><code>--date ... --finalise</code></td><td>After ~19:00 UK</td><td>Fills final scores and result</td></tr>
+<tr><td><code>--date ... --enrich</code></td><td>Next day</td><td>Fills corners, cards, fouls, shots from football-data.co.uk season CSVs</td></tr>
+</table>
+
+<p class="muted">The enrichment path is verified end-to-end against a completed fixture (Leeds 1-1 Man United, 18 Oct 2026): corners 2/3, cards 2/2, fouls 16/5, shots 12/13 — all matching the source exactly. football-data.co.uk publishes weekly, so today's fixtures will only gain their stats on a later run. That is expected, not a failure.</p>
+
+<div class="card warn">
+<p style="margin:0"><strong>What today can and cannot settle.</strong> One windy Saturday is a single data point, not a test — 90 fixtures with no control group tells us nothing on its own about whether wind mattered. Its value is cumulative: logged alongside every future windy card, with pre-match weather fixed before results are known, it becomes a genuinely out-of-sample test that avoids the post-hoc selection problem that sank the original claim. The log is only worth keeping if the weather is written <em>before</em> kick-off and never revised.</p>
+</div>
+
+<h2>5 · The three things that would make this tradeable</h2>
+<div class="card ok">
+<ol style="margin:6px 0;padding-left:20px">
+<li><strong>Backfill gusts, not just sustained speed.</strong> Open-Meteo archive returns <code>wind_gusts_10m_max</code> for any stadium coordinate back to 1940. The legacy 286-file sample only has sustained maxima — which is why today's gust event is outside its range. Partial run completed for 9 grounds before hitting Open-Meteo's hourly request cap; the resumable script is <code>scripts/backfill_archive.py</code> and needs multi-hour throttling or decade chunking.</li>
+<li><strong>Add hourly wind bearing.</strong> This is the only version of the claim with a clean mechanism and a clean test: within a single match, the half played <em>with</em> a 60 kph crosswind should produce measurably different corner and shot counts than the half played against it. Paired design, opponent strength cancels out.</li>
+<li><strong>Extend to Scotland.</strong> Every tradeable fixture today is Scottish or lower-English, and the sample has zero of either. The research library is currently generalising an EPL-only result to grounds it has never seen.</li>
+</ol>
+</div>
+
+<div class="foot">
+<strong>Method.</strong> Reproduce with <code>python src/analysis/wind_analysis.py</code>, which builds <code>data/processed/wind_matched.csv</code> from source. Legacy per-match Open-Meteo files (n=278) mapped to stadiums via nearest-coordinate match against <code>data/reference/grounds.py</code>, joined to <code>data/processed/match_master_table.csv</code> on date + home team → n=241 usable. Tests: Welch t-tests, Pearson correlation, likelihood-ratio tests against intercept-only logit, two-way ANOVA, Levene variance tests, 10,000-sample bootstrap, and a power calculation. Venue forecasts from Open-Meteo <code>forecast</code> endpoint at stadium coordinates, kick-off hour. Odds from BetMGM/DraftKings via SportsGambler, FanDuel and ESPN, captured 24 Oct 2026.<br><br>
+<strong>Caveat.</strong> Every price quoted is pre-match and will move. The wind claim in the research library does not replicate on the data we hold; the fouls/cards/second-half signal is a 29-match lead that fails Bonferroni correction. Treat the picks above as hypotheses with a mechanism, not as validated edges. Stake accordingly — or not at all.
+</div>
+
+</body>
+</html>

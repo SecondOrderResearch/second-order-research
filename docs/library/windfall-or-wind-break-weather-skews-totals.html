@@ -34,35 +34,147 @@
       <div class="entry-body">
         <article class="entry-main">
           <h1>Windfall or Wind Break: How Weather Skews Totals</h1>
-          <p><strong>Published:</strong> 2026-08-31</p>
-<p><strong>Bookmakers adjust for rain. They don’t adjust enough for wind.</strong></p>
+          <p><strong>Published:</strong> 2026-08-31
+<strong>Amended:</strong> 2026-10-24 — headline claims withdrawn after failed replication
+<strong>Status:</strong> Mechanism note only. No stakable totals claim survives.</p>
+<blockquote>
+<p><strong>Amendment notice.</strong> The original version of this note claimed that wind above 20 kph reduced total goals by ~10% (~0.3 goals per match), that coastal grounds were disproportionately affected, and that bettors should fade overs at exposed grounds. All three were tested against the project's own data on 2026-10-24 and none held. See <code>2026-10-24-wind-fails-to-replicate.md</code> for the full replication study and <code>src/analysis/wind_analysis.py</code> for the code. The claims are withdrawn below and the reasoning retained as explicitly untested.</p>
+<p><strong>Note also:</strong> <code>research/public/2026-08-03-weather-wind.md</code> had already tested this hypothesis and marked it <strong>Rejected</strong> on 2026-08-03 — four weeks before this note was published asserting the opposite. This note should never have been written in this form. That failure is documented in the replication study.</p>
+</blockquote>
 <h2>Bottom Line Up Front</h2>
 <ul>
-<li>Strong wind (&gt;20 kph) reduces total goals by ~10%</li>
-<li>Coastal/exposed stadiums are disproportionately affected</li>
-<li>Bookmaker totals don’t shift enough pre-match</li>
-<li><strong>Action:</strong> Fade overs at exposed grounds when wind speeds exceed 20 kph; live-bet unders if early play is scrappy</li>
+<li><strong>Wind shows no reliable goals effect in our data (n=241, −5.8%, p=0.46). Do not stake on wind totals.</strong></li>
+<li>The claimed coastal effect reverses on test: coastal <strong>+0.15</strong> goals vs inland <strong>−0.22</strong>, p=0.82.</li>
+<li>Wind + rain does not produce the claimed −0.5 goals: observed −0.38, p=0.20.</li>
+<li>The corners claim — "back the end with the wind" — cannot be tested with our data (no bearing, no pitch orientation). An orientation-free variance test finds no asymmetry inflation (r=+0.004, p=0.96).</li>
+<li><strong>Action:</strong> none on totals. The only signal worth tracking is a fouls/cards lead in genuine storms, and it is too fragile to stake.</li>
 </ul>
-<h2>The Read</h2>
-<p>Weather data is increasingly available, but the betting market treats rain and wind as binary “bad weather” rather than nuanced performance modifiers. Wind affects long passes, crossing accuracy, and goalkeeper distribution — all of which suppress scoring.</p>
-<p>Our dataset includes wind speed, precipitation, and stadium location. The signal is strongest at:
-- Coastal grounds: St James’ Park, St Mary’s, Pittodrie
-- Open stadiums with minimal shelter</p>
-<h2>Key Numbers</h2>
+<h2>What Was Withdrawn</h2>
+<table>
+<thead>
+<tr>
+<th>Original claim</th>
+<th>Test</th>
+<th>Observed</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wind &gt;20 kph cuts goals ~10%</td>
+<td>t-test, 92 calm vs 149 windy</td>
+<td>−5.8%, p=0.46</td>
+<td>Withdrawn</td>
+</tr>
+<tr>
+<td>Goals drop ~0.3/match</td>
+<td>mean difference</td>
+<td>−0.163, CI [−0.60,+0.27]</td>
+<td>Withdrawn</td>
+</tr>
+<tr>
+<td>Wind + rain: −0.5 goals</td>
+<td>wet-windy vs dry-calm</td>
+<td>−0.379, p=0.20</td>
+<td>Withdrawn</td>
+</tr>
+<tr>
+<td>Coastal grounds hit hardest</td>
+<td>coastal vs inland</td>
+<td>+0.15 vs −0.22, p=0.82</td>
+<td>Withdrawn (sign reverses)</td>
+</tr>
+<tr>
+<td>First-half scoring most affected</td>
+<td>FH goals vs wind</td>
+<td>r=+0.05, p=0.46</td>
+<td>Withdrawn</td>
+</tr>
+<tr>
+<td>Corners: back the end with the wind</td>
+<td>needs bearing</td>
+<td>no direction data</td>
+<td>Untestable</td>
+</tr>
+</tbody>
+</table>
+<p>Sample: 241 Premier League fixtures, 2003-08-24 to 2016-05-15, venue-level weather joined from the legacy Open-Meteo files.</p>
+<h2>The Read — Mechanism, Explicitly Untested</h2>
+<p>Weather data is increasingly available, and the betting market does tend to treat rain and wind as a binary "bad weather" flag rather than a nuanced performance modifier. That framing is plausible.</p>
+<p>The mechanism is also plausible: wind plausibly degrades long-pass accuracy, crossing, and goalkeeper distribution, all of which would suppress scoring. <strong>This remains reasoning, not measurement.</strong> Nothing in our data confirms it, and the specific magnitudes the original note asserted were wrong.</p>
+<p>Two things the original note got wrong at the level of reasoning, not just arithmetic:</p>
 <ul>
-<li>Wind &gt;20 kph: goals drop by ~0.3 per match</li>
-<li>Wind + rain: goals drop by ~0.5 per match</li>
-<li>First-half scoring is most affected</li>
+<li><strong>Exposure is not the same as effect.</strong> Naming St James' Park, St Mary's and Pittodrie as the worst-affected grounds is a claim about a subset selected <em>for being windy</em>. Testing the whole sample shows coastal grounds scoring slightly <strong>more</strong> in wind than inland ones. That is the signature of a pattern fitted to noise.</li>
+<li><strong>"The market hasn't priced it" needs evidence too.</strong> Asserting bookmaker totals don't shift enough for wind requires a comparison of closing lines against realised outcomes. The original note never made that comparison.</li>
 </ul>
-<h2>Market Inefficiency</h2>
-<p>Weather lines are set late and often don’t reflect real-time conditions. Bettors who monitor live weather data can gain an edge before the market catches up.</p>
-<h2>Betting Actions</h2>
+<h2>Key Numbers — Replaced With Tested Results</h2>
+<div class="codehilite"><pre><span></span><code>calm  (&lt;=20 kph)  n= 92   goals = 2.793
+windy ( &gt;20 kph)  n=149   goals = 2.631
+delta = -0.163 goals (-5.8%)    p = 0.46
+</code></pre></div>
+
+<p>The effect is less than half the originally claimed magnitude and indistinguishable from zero. A threshold scan across 16 cut-points from 15 to 37.5 kph found no cut producing significance; the minimum p was 0.12 at 35 kph, which fails Bonferroni correction (p×16 = 1.92).</p>
+<p><strong>What does survive, tentatively.</strong> Isolating the cell that resembles a genuine storm — wind &gt;35 kph and rain &gt;2 mm (n=29):</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Storm cell</th>
+<th>Rest</th>
+<th>Shift</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total fouls</td>
+<td>19.86</td>
+<td>22.04</td>
+<td>−9.9%</td>
+<td>0.030</td>
+</tr>
+<tr>
+<td>Total cards</td>
+<td>2.52</td>
+<td>3.29</td>
+<td>−23.4%</td>
+<td>0.019</td>
+</tr>
+<tr>
+<td>Second-half goals</td>
+<td>1.17</td>
+<td>1.57</td>
+<td>−25.4%</td>
+<td>0.038</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>2.31</td>
+<td>2.75</td>
+<td>−15.8%</td>
+<td>0.096</td>
+</tr>
+<tr>
+<td>Total corners</td>
+<td>10.90</td>
+<td>11.03</td>
+<td>−1.2%</td>
+<td>0.878</td>
+</tr>
+</tbody>
+</table>
+<p>Seven metrics were tested on a 29-match cell; the Bonferroni threshold is p&lt;0.007 and <strong>nothing clears it</strong>. The cell was also selected after observing that the full-sample test failed. Record it as a hypothesis with a coherent physical story — a scrappy, low-continuity game with fewer reckless challenges — not as an edge.</p>
+<h2>Market Inefficiency — Unproven</h2>
+<p>The original note claimed weather lines are set late and don't reflect real-time conditions, and that bettors monitoring live weather gain an edge before the market catches up.</p>
+<p><strong>This has not been tested and should not be assumed.</strong> Testing it requires closing-line data paired with realised outcomes across a large sample of weather-affected fixtures. We hold no closing-line history. Until that exists, treat "the market hasn't priced the wind" as an untested hypothesis, not a finding.</p>
+<h2>Betting Actions — Downgraded to Untested Hypotheses</h2>
 <table>
 <thead>
 <tr>
 <th>Market</th>
 <th>Trigger</th>
-<th>Action</th>
+<th>Original action</th>
+<th>Status</th>
 </tr>
 </thead>
 <tbody>
@@ -70,21 +182,69 @@
 <td>Total goals</td>
 <td>Wind &gt;20 kph + exposed stadium</td>
 <td>Fade over</td>
+<td><strong>Withdrawn</strong> — no effect found</td>
 </tr>
 <tr>
 <td>In-play</td>
 <td>Wind-affected early play + no goal by 30 min</td>
 <td>Live under</td>
+<td><strong>Untested</strong> — no in-play data</td>
 </tr>
 <tr>
 <td>Corners</td>
 <td>Wind blowing toward one goal</td>
 <td>Back end with wind advantage</td>
+<td><strong>Untestable</strong> — no bearing or pitch-orientation data</td>
+</tr>
+<tr>
+<td>Fouls / cards</td>
+<td>Wind &gt;35 kph + rain &gt;2 mm</td>
+<td>—</td>
+<td><strong>Hypothesis only</strong> — p=0.03–0.02 on n=29, fails multiple-comparison correction</td>
 </tr>
 </tbody>
 </table>
+<p>None of these is a staking instruction. The first is positively contradicted by the data.</p>
+<h2>Data Gaps That Block a Real Test</h2>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No gust data in the legacy files</td>
+<td>Storms are defined by gusts (55–80 kph), not sustained speed. The sample never measured the variable that matters.</td>
+</tr>
+<tr>
+<td>No wind bearing or pitch orientation</td>
+<td>The one mechanism with a clean within-match test — half with the wind vs half against, opponent strength cancelling — cannot be run.</td>
+</tr>
+<tr>
+<td>English Premier League only</td>
+<td>Every ground where this advice would actually be used — Scottish, lower English divisions — is absent.</td>
+</tr>
+<tr>
+<td>Only 17 of 241 matches exceed 40 kph</td>
+<td>Storm conditions are extrapolation, not interpolation.</td>
+</tr>
+<tr>
+<td>~28% power to detect a 10pp shift</td>
+<td>Absence of significance is <strong>not</strong> evidence of absence. The effect could be real and this sample cannot see it.</td>
+</tr>
+</tbody>
+</table>
+<p>The power point cuts both ways and must be stated plainly: this note does not prove wind is irrelevant. It proves the specific, stakable claims the original version made are not supported by the evidence the original version cited.</p>
 <h2>Confidence</h2>
-<p><strong>Medium</strong> for totals; <strong>low</strong> for in-play because other factors dominate early.</p>
+<p><strong>None</strong> for totals until the gust backfill completes. <strong>None</strong> for in-play (no data). <strong>None</strong> for corners (untestable as things stand). <strong>Low</strong> on the fouls/cards storm lead — physically plausible, statistically fragile, post-hoc selected.</p>
+<h2>See Also</h2>
+<ul>
+<li><code>2026-10-24-wind-fails-to-replicate.md</code> — full replication study, method, and the build that would settle it</li>
+<li><code>src/analysis/wind_analysis.py</code> — reproduces every number in this note from source</li>
+<li><code>scripts/capture_wind_events.py</code> — logs windy fixtures with pre-match weather for future out-of-sample testing</li>
+</ul>
         </article>
         <aside class="entry-sidebar">
           <div class="sidebar-card">
