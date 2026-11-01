@@ -148,7 +148,22 @@ The 90-fixture log in `data/processed/wind_event_log.csv` is not clean. Three de
 | **Results silently dropped** | 8 | `bbc_scores.parse` matches only the inline `X 1 , Y 2 at Full time` rendering. Fixtures rendered with the score on its own line, or whose status is not "Full time" (after extra time, postponed, suspended), are not emitted at all. Barrow v Forest Green Rovers, Greenock Morton v Ayr United (postponed), Cove Rangers v East Kilbride, Bonnyton Thistle v Clachnacuddin, Brechin City v Strathspey Thistle, Brora Rangers v Cowdenbeath, Huntly v Annan Athletic and Troon v Caledonian Braves therefore carry no result. |
 | **Opponent discarded** | 2 | `grounds.resolve()` returns `None` for clubs absent from the ground registry, and the raw BBC name is discarded rather than retained, so Dumbarton v Keith and Bury v Prescot Cables are stored with a null away team. |
 
-Consequences for anything built on this log: only 79 of 90 fixtures could be validated; four of the eight dropped matches are shown on the BBC page as having gone to extra time, so the usable sample under-represents high-scoring games; and the three mis-dated rows must be excluded before this log is aggregated with any other date.
+### All three fixed, 2026-10-25
+
+The log has been rebuilt and the capture code corrected. Current state: **87 fixtures for 24 October, 84 with results** (80 full time, 4 extra time), plus 13 for 23 October as a comparison day.
+
+| Fix | Change |
+|---|---|
+| Split-line and AET rendering | `bbc_scores.parse` now handles four forms: inline `at Full time`, inline `After extra time`, the split `team / H / A / team / status` layout, and postponed matches whose score lines render as `P` / `P`. Statuses map to `FT`, `AET`, `suspended`, `postponed`, `abandoned`, `HT`, `live`. |
+| Duplicate listing | Some fixtures appear twice, once scheduled and once with a score. The parser previously kept the first occurrence and discarded the result; an entry carrying a score now upgrades a scoreless one in place. |
+| Mis-dated rows | The three 31 October fixtures were removed from the log. They are not emitted by the current page, so they were stale rows rather than a live filter bug — but the filter still does not verify the fixture's date, which remains a latent weakness. |
+| Null opponents | `capture_wind_events.py` keeps the raw BBC name when the registry has no entry, so no row is stored with a null team. |
+| Non-final scores | A result is recorded only for `FT` and `AET`. A suspended match has a score at the point of stoppage, which is not an outcome. |
+| Ground registry | 11 Welsh and Irish grounds added from verified OpenStreetMap stadium records (`data/reference/grounds_verified.json`). An earlier unrestricted Nominatim pass was discarded: it resolved The New Saints to a church in New York and Bohemians to Prague. |
+
+**Still outstanding:** the capture filter does not check that a fixture belongs to the requested date, so a page that renders adjacent matchdays can still leak rows in. The current 24 October page does not, but that is luck rather than a guarantee.
+
+Consequences for anything built on this log: only 79 of 90 fixtures could be validated in the original capture; four of the eight dropped matches went to extra time, so the usable sample under-represented high-scoring games. Both are now resolved, and the rebuilt log is the one to aggregate from.
 
 ---
 

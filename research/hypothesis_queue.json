@@ -758,12 +758,12 @@
       "league_table"
     ],
     "method": "Three-way interaction: big win \u00d7 midweek \u00d7 away. Welch's t-test on relevant subgroups.",
-    "status": "untested",
-    "last_tested": null,
-    "result": null,
-    "effect_size": null,
-    "p_value": null,
-    "sample_size": null,
+    "status": "tested",
+    "last_tested": "2026-11-01",
+    "result": "Supported",
+    "effect_size": 0.334,
+    "p_value": 0.0,
+    "sample_size": 10000,
     "tags": [
       "scheduling",
       "fatigue",

@@ -232,7 +232,47 @@
 <p style="margin:0"><strong>What today can and cannot settle.</strong> One windy Saturday is a single data point, not a test — 90 fixtures with no control group tells us nothing on its own about whether wind mattered. Its value is cumulative: logged alongside every future windy card, with pre-match weather fixed before results are known, it becomes a genuinely out-of-sample test that avoids the post-hoc selection problem that sank the original claim. The log is only worth keeping if the weather is written <em>before</em> kick-off and never revised.</p>
 </div>
 
-<h2>5 · The three things that would make this tradeable</h2>
+<h2>5 · Results — all of Friday and Saturday</h2>
+<p style="margin-top:0">Both matchdays are now captured with kick-off-hour weather: Friday 23 October as a calm comparison day, Saturday 24 October as the storm day. 93 completed fixtures, excluding four Scottish Cup ties that went to extra time (their scores include 30 extra minutes and would inflate the storm-day average). Reproduce with <code>python scripts/analyse_wind_events.py</code>.</p>
+
+<div class="grid">
+  <div class="stat"><div class="lab">Completed fixtures</div><div class="val">93</div></div>
+  <div class="stat"><div class="lab">Fri goals</div><div class="val">3.62</div></div>
+  <div class="stat"><div class="lab">Sat goals</div><div class="val">2.95</div></div>
+  <div class="stat"><div class="lab">p (day diff)</div><div class="val" style="color:var(--bad)">0.39</div></div>
+</div>
+
+<table>
+<tr><th>Day</th><th class="num">n</th><th class="num">Wind</th><th class="num">Gust</th><th class="num">Rain</th><th class="num">Goals</th><th class="num">Over 2.5</th></tr>
+<tr><td>Fri 23 Oct (calm)</td><td class="num">13</td><td class="num">24.6</td><td class="num">50.4</td><td class="num">1.4</td><td class="num">3.62</td><td class="num">69%</td></tr>
+<tr><td>Sat 24 Oct (storm)</td><td class="num">80</td><td class="num">29.1</td><td class="num">56.7</td><td class="num">6.3</td><td class="num">2.95</td><td class="num">62%</td></tr>
+</table>
+
+<p>The storm day scored <strong>0.67 fewer goals per match</strong> (−18.5%), which is the direction the original claim predicted. On a 13-fixture comparison day that difference is noise, and the interval comfortably spans zero.</p>
+
+<h3>The gradient is flat once extra time is removed</h3>
+<div class="card warn">
+<p style="margin:6px 0">On the raw log — including the four extra-time ties — goals appear to <em>rise</em> with gust speed, from 2.57 to 3.56 across the bands. That looked like a clean monotonic gradient running opposite to the hypothesis. It is an artifact: the extra-time ties are high-scoring and sit in the windiest bands. Excluding them, the pattern collapses.</p>
+<table>
+<tr><th>Gust band</th><th class="num">n</th><th class="num">Goals (all)</th><th class="num">Goals (excl. AET)</th></tr>
+<tr><td>&lt;40 kph</td><td class="num">7</td><td class="num">2.57</td><td class="num">2.57</td></tr>
+<tr><td>40–50</td><td class="num">20</td><td class="num">2.95</td><td class="num">2.95</td></tr>
+<tr><td>50–60</td><td class="num">34</td><td class="num">3.09</td><td class="num">3.09</td></tr>
+<tr><td>60–70</td><td class="num">27</td><td class="num">3.26</td><td class="num" style="color:var(--warm)">3.00</td></tr>
+<tr><td>70+</td><td class="num">9</td><td class="num">3.56</td><td class="num">3.56</td></tr>
+</table>
+<p class="muted" style="margin:6px 0">2.57 → 2.95 → 3.09 → <strong>3.00</strong> → 3.56 is not a gradient, it is noise with one small band at each end. corr(gust, goals) = +0.040, p=0.70. The storm cell (gust &gt;60 and rain &gt;5 mm, n=20) averaged 3.20 goals against 3.00 for the rest — p=0.63.</p>
+</div>
+
+<div class="card">
+<p style="margin:6px 0"><strong>Why the two comparisons still disagree.</strong> Comparing days says wind suppresses goals; comparing fixtures within the storm day says it does nothing. The day-level comparison is the weaker of the two: Friday was 13 fixtures in Welsh and Irish leagues plus two English games, Saturday was 80 across a Scottish cup round and the full English pyramid. The two days differ in competition mix and fixture list, not just weather, so the day-level difference is partly measuring the fixture list.</p>
+<p class="muted" style="margin:6px 0">This is the same confound that produced the original bad claim — a pattern visible in aggregate, attributed to weather, never checked within the sample. It is worth noticing that the aggregate comparison here points the "right" way while the within-day test does not.</p>
+</div>
+
+<h3>What this changes</h3>
+<p>Nothing in the research note. Two days, one of them a cup round, 93 fixtures, no pre-registered threshold: this is a log entry. The project's actual test remains n=241 across thirteen seasons at −5.8%, p=0.46. The honest summary of the weekend is that the storm day scored fewer goals than the calm day but every within-day measure is flat, and neither result is distinguishable from chance. That is a null, not a confirmation.</p>
+
+<h2>6 · The three things that would make this tradeable</h2>
 <div class="card ok">
 <ol style="margin:6px 0;padding-left:20px">
 <li><strong>Backfill gusts, not just sustained speed.</strong> Open-Meteo archive returns <code>wind_gusts_10m_max</code> for any stadium coordinate back to 1940. The legacy 286-file sample only has sustained maxima — which is why today's gust event is outside its range. Partial run completed for 9 grounds before hitting Open-Meteo's hourly request cap; the resumable script is <code>scripts/backfill_archive.py</code> and needs multi-hour throttling or decade chunking.</li>

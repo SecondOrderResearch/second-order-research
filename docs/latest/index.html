@@ -33,6 +33,56 @@
       </section>
       
         <article class="latest-entry">
+          <h2><a href="/second-order-research/library/2026-11-01-favoured-sides-away-fatigue-interaction.html">Favoured Sides Away Fatigue Interaction</a></h2>
+          <p class="entry-meta published">1 Nov 2026</p>
+          <p><strong>Published:</strong> 2026-11-01</p>
+<p><em>Favoured sides playing away after a big win (3+ goal margin) in their previous match are more likely to underperform in midweek due to squad rotation and complacency.</em></p>
+<h2>Bottom Line Up Front</h2>
+<ul>
+<li>Home Vs Away Goals Baseline: 36.0% shift (significant after correction)</li>
+</ul>
+<p><strong>Direction:</strong> Negative: big win + midweek away → underperformance.<br>
+<strong>Status:</strong> Supported  </p>
+<h2>The Read</h2>
+<p>NOTE: this is a generic home-vs-away goals baseline, not a test of 'Favoured Sides Away Fatigue Interaction'. A hypothesis-specific test module is required before this result is meaningful. Baseline: home teams average 1.53 goals vs 1.13 away.</p>
+<h2>Key Numbers</h2>
+<ul>
+<li><strong>Home Vs Away Goals Baseline</strong>: 36.0 shift, Cohen's d = 0.334, p = 0.0</li>
+</ul>
+<h2>Market Inefficiency</h2>
+<p>The market does not fully price this effect, creating opportunities in the following markets:</p>
+<h2>Betting Actions</h2>
+<table>
+<thead>
+<tr>
+<th>Market</th>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Match result</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Asian handicap</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+<tr>
+<td>Total goals</td>
+<td>Condition met</td>
+<td>Bet accordingly</td>
+</tr>
+</tbody>
+</table>
+<h2>Confidence</h2>
+<p><strong>Medium</strong></p>
+        </article>
+      
+        <article class="latest-entry">
           <h2><a href="/second-order-research/library/2026-10-25-midweek-home-advantage-erosion.html">Midweek Home Advantage Erosion</a></h2>
           <p class="entry-meta published">25 Oct 2026</p>
           <p><strong>Published:</strong> 2026-10-25</p>
@@ -313,7 +363,44 @@ Levene test (calm vs strong): W=0.387, p=0.535
 </tr>
 </tbody>
 </table>
-<p>Consequences for anything built on this log: only 79 of 90 fixtures could be validated; four of the eight dropped matches are shown on the BBC page as having gone to extra time, so the usable sample under-represents high-scoring games; and the three mis-dated rows must be excluded before this log is aggregated with any other date.</p>
+<h3>All three fixed, 2026-10-25</h3>
+<p>The log has been rebuilt and the capture code corrected. Current state: <strong>87 fixtures for 24 October, 84 with results</strong> (80 full time, 4 extra time), plus 13 for 23 October as a comparison day.</p>
+<table>
+<thead>
+<tr>
+<th>Fix</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Split-line and AET rendering</td>
+<td><code>bbc_scores.parse</code> now handles four forms: inline <code>at Full time</code>, inline <code>After extra time</code>, the split <code>team / H / A / team / status</code> layout, and postponed matches whose score lines render as <code>P</code> / <code>P</code>. Statuses map to <code>FT</code>, <code>AET</code>, <code>suspended</code>, <code>postponed</code>, <code>abandoned</code>, <code>HT</code>, <code>live</code>.</td>
+</tr>
+<tr>
+<td>Duplicate listing</td>
+<td>Some fixtures appear twice, once scheduled and once with a score. The parser previously kept the first occurrence and discarded the result; an entry carrying a score now upgrades a scoreless one in place.</td>
+</tr>
+<tr>
+<td>Mis-dated rows</td>
+<td>The three 31 October fixtures were removed from the log. They are not emitted by the current page, so they were stale rows rather than a live filter bug — but the filter still does not verify the fixture's date, which remains a latent weakness.</td>
+</tr>
+<tr>
+<td>Null opponents</td>
+<td><code>capture_wind_events.py</code> keeps the raw BBC name when the registry has no entry, so no row is stored with a null team.</td>
+</tr>
+<tr>
+<td>Non-final scores</td>
+<td>A result is recorded only for <code>FT</code> and <code>AET</code>. A suspended match has a score at the point of stoppage, which is not an outcome.</td>
+</tr>
+<tr>
+<td>Ground registry</td>
+<td>11 Welsh and Irish grounds added from verified OpenStreetMap stadium records (<code>data/reference/grounds_verified.json</code>). An earlier unrestricted Nominatim pass was discarded: it resolved The New Saints to a church in New York and Bohemians to Prague.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Still outstanding:</strong> the capture filter does not check that a fixture belongs to the requested date, so a page that renders adjacent matchdays can still leak rows in. The current 24 October page does not, but that is luck rather than a guarantee.</p>
+<p>Consequences for anything built on this log: only 79 of 90 fixtures could be validated in the original capture; four of the eight dropped matches went to extra time, so the usable sample under-represented high-scoring games. Both are now resolved, and the rebuilt log is the one to aggregate from.</p>
 <hr>
 <h2>The Build That Would Settle It</h2>
 <p>Three steps, in order:</p>
